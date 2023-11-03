@@ -36,6 +36,17 @@ export interface IDatabase {
   xact_commit: number;
   xact_rollback: number;
   tablespace: IDbTableSpace;
+  charts: IDbCharts;
+}
+
+export interface IDbCharts {
+  sessions: Array<IChartValue>
+  trans_idle: Array<IChartValue>;
+}
+
+export interface IChartValue {
+  value: number;
+  date: string;
 }
 
 export interface IDbTableSpace {

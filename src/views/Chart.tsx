@@ -67,7 +67,7 @@ const Chart = (props) => {
             </linearGradient>
           </defs>
           <XAxis dataKey="name" />
-          <YAxis dataKey="Сбои" />
+          <YAxis dataKey="Значение" />
           <XAxis
             dataKey="time"
             type="number"
@@ -78,7 +78,7 @@ const Chart = (props) => {
           <Tooltip />
           <Area
             type="monotone"
-            dataKey="Сбои"
+            dataKey="Значение"
             stroke="#8884d8"
             fillOpacity={1}
             fill="url(#colorUv)"

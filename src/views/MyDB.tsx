@@ -4,7 +4,7 @@ import {Accordion, Container, ProgressBar, Spinner} from "react-bootstrap";
 import {useTelegram} from '../hooks/useTelegram'
 import Chart from "./Chart";
 import BaseButton from "../components/ui/BaseButton/BaseButton";
-import {IDatabase} from "../models/db.model";
+import {IDatabase, IDbCharts} from "../models/db.model";
 import {DBApi} from "../services/dbApiService";
 import StatusBadge from "../components/ui/StatusBadge/StatusBadge";
 
@@ -13,48 +13,46 @@ const MyDB = () => {
   const navigate = useNavigate();
   const [database, setDatabase] = useState<IDatabase>({} as IDatabase);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const interval = setInterval(() => {
-    getDbInfo(false);
-  }, 30000)
+  const [charts, setCharts] = useState<Array<Array<unknown>>>([]);
+  const abortController = new AbortController()
+  const signal = abortController.signal;
 
   const getDbInfo = async (needLoader = true) => {
-    needLoader && setIsLoading(true);
-    setDatabase(await DBApi.getDb(Number(id)));
-    needLoader && setIsLoading(false);
+    abortController.abort();
+
+    try {
+      needLoader && setIsLoading(true);
+      setDatabase(await DBApi.getDb(Number(id)));
+    }
+    catch (err) {
+      console.error(err);
+    }
+    finally {
+      needLoader && setIsLoading(false);
+    }
   }
 
-  const db = {
-    id: 1,
-    name: "Имя",
-    data: [
-       {
-         name: 'Имя1', time: Date.now() , 'Сбои': "300",
-       },
-      {
-        name: 'Имя2', time: Date.now() - 10000, 'Сбои': "700",
-      },
-      {
-        name: 'Имя3', time: Date.now() - 18000, 'Сбои': "500",
-      },
-      {
-        name: 'Имя4', time: Date.now() - 35000, 'Сбои': "100",
-      },
-    ]
-  };
+  useEffect(() => {
+    setCharts([
+      database.charts?.sessions?.map((session) => ({ name: new Date(session.date), time: session.date, 'Значение': session.value })),
+      database.charts?.trans_idle?.map((transaction) => ({ name: new Date(transaction.date), time: transaction.date, 'Значение': transaction.value }))
+    ])
+  }, [database])
 
   const { tg } = useTelegram();
   
   useEffect(() => {
     tg.ready();
     getDbInfo();
+        
+    const interval = setInterval(() => {
+      getDbInfo(false);
+    }, 30000)
 
     return () => {
       clearInterval(interval);
     }
   }, []);
-
-  const now = 60;
 
   if (isLoading) {
     return (
@@ -82,19 +80,19 @@ const MyDB = () => {
       <br />
 
       <span>Занято дискового пространства</span>
-      <ProgressBar now={(database.size / database.tablespace?.size) * 100} label={`${now}%`} />
+      <ProgressBar now={(database.size / database.tablespace?.size) * 100} label={`${Math.round((database.size / database.tablespace?.size) * 100)}%`} />
       
       <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0">
           <Accordion.Header>Количество активных сессий</Accordion.Header>
           <Accordion.Body>
-            <Chart data={db.data}/>
+            <Chart data={charts?.[0]}/>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
           <Accordion.Header>Количество транзакций</Accordion.Header>
           <Accordion.Body>
-            <Chart data={db.data}/>
+            <Chart data={charts?.[1]}/>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
