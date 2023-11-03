@@ -18,11 +18,10 @@ const MainPage = () => {
   
   const getDb = async () => {
     // setIsLoading(true);
-      await DBApi.getAllDbs(tg.initDataUnsafe?.user?.id)?.then((data) => { 
-        setDbs(data.data as any)
-      })
-
-
+      const res = await DBApi.getAllDbs(tg.initDataUnsafe?.user?.id)
+      const parsed = await res.data;
+      setDbs(parsed);
+      
       // setIsLoading(false);
     
   }
