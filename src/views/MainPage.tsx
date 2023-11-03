@@ -39,7 +39,7 @@ const MainPage = () => {
 
   return (
     <div className="main-page">
-      {JSON.stringify(listId)}
+
       {process.env.REACT_APP_API_URL}
       { listId?.length && listId?.map((id) => 
           <DBListItem 
