@@ -17,13 +17,13 @@ const MainPage = () => {
   const navigate = useNavigate();
   
   const getDb = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
       await DBApi.getAllDbs(tg.initDataUnsafe?.user?.id)?.then((data) => { 
         setDbs(data.data as any)
       })
 
 
-      setIsLoading(false);
+      // setIsLoading(false);
     
   }
 
@@ -32,13 +32,13 @@ const MainPage = () => {
     getDb();
   }, [])
 
-  if (isLoading) {
-    return (
-      <div className="app-loader">
-        <Spinner />
-      </div>
-    )
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="app-loader">
+  //       <Spinner />
+  //     </div>
+  //   )
+  // }
 
   return (
     <div className="main-page">
