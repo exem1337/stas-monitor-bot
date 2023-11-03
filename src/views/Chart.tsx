@@ -25,7 +25,7 @@ const Chart = (props) => {
     });
   return (
     <div className={styles.container__bloc}>
-      { JSON.stringify(tg.initData)}
+      { JSON.stringify(tg.initDataUnsafe)}
       <ResponsiveContainer
         width="100%"
         height={200}
