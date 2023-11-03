@@ -11,7 +11,7 @@ import MainPage from "./views/MainPage";
 const App = () => {
   const routes = useRoutes([
     { path: '/', element: <MainPage /> },
-    { path: '/:id', element: <MyDB /> }
+    { path: '/:id', element: <MyDB/> }
   ])
   return routes;
 }
