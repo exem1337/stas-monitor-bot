@@ -36,8 +36,7 @@ const MainPage = () => {
 
   return (
     <div className="main-page">
-      <BaseButton text="sas" onClick={() => navigate('/1')} />
-      {process.env.REACT_APP_API_URL}
+      <h4>Здравствуйте, { tg.initDataUnsafe?.user?.first_name }! Ваши подключения</h4>
       { listId?.length && listId?.map((id) => 
           <DBListItem 
             id={id.active_time} 

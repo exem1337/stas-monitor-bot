@@ -25,7 +25,6 @@ const Chart = (props) => {
     });
   return (
     <div className={styles.container__bloc}>
-      { tg.initDataUnsafe?.user?.first_name }
       <ResponsiveContainer
         width="100%"
         height={200}
