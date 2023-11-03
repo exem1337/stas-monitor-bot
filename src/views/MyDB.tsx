@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {Accordion, Container, ProgressBar, Spinner} from "react-bootstrap";
 import {useTelegram} from '../hooks/useTelegram'
 import Chart from "./Chart";
@@ -9,13 +9,16 @@ import { DBApi } from "../services/dbApiService";
 
 const MyDB = () => {
   const { id } = useParams()
+  const navigate = useNavigate();
   const [database, setDatabase] = useState<IDatabase>({} as IDatabase);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const getDbInfo = async () => {
-    setIsLoading(true);
+  const interval = setInterval(() => {
+    getDbInfo(false);
+  }, 30000)
+  const getDbInfo = async (needLoader = true) => {
+    needLoader && setIsLoading(true);
     setDatabase(await DBApi.getDb(Number(id)));
-    setIsLoading(false);
+    needLoader && setIsLoading(false);
   }
 
   useEffect(() => {
@@ -44,6 +47,10 @@ const MyDB = () => {
   
   useEffect(() => {
     tg.ready();
+
+    return () => {
+      clearInterval(interval);
+    }
   }, []);
 
   const now = 60;
@@ -59,10 +66,16 @@ const MyDB = () => {
   return (
     <Container className="my-db">
       <h1>{database.name}</h1>
-      <BaseButton text="Назад" />
+      <BaseButton 
+        text="Назад" 
+        className="back-button" 
+        onClick={() => navigate('/')}
+      />
+
+      <br />
 
       <span>Занято дискового пространства</span>
-      <ProgressBar now={now} label={`${now}%`} />
+      <ProgressBar now={(database.size / database.tablespace?.size) * 100} label={`${now}%`} />
       
       <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0">

@@ -12,7 +12,7 @@ const BaseButton = (props: IBaseButtonProps) => {
 
   return (
     <Button
-      className={`base-button ${isLoading && 'loading'}`}
+      className={`base-button ${isLoading && 'loading'} ${props.className && props.className}`}
       disabled={props.disabled}
       onClick={props.onClick}
     >

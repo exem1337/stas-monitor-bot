@@ -34,6 +34,7 @@ export interface IBaseButtonProps {
   text: string;
   onClick?: (...args: any) => any | Promise<any>;
   disabled?: boolean;
+  className?: string;
   children?: any;
   loading?: boolean;
 }

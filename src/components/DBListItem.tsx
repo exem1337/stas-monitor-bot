@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { EDBStatuses } from "../enums/dbStatuses.enum";
 import { DB_STATUS_NAME_MAP } from "../constants/dbStatusNameMap.const";
-import { DB_STATUS_COLOR_MAP } from "../constants/dbStatusColorMap.const";
 import "./DBListItem.scss"
+import { DB_STATUS_COLOR_MAP } from "../constants/dbStatusColorMap.const";
 
 interface IDbListItemProps {
   id: number;

@@ -35,4 +35,17 @@ export interface IDatabase {
   tup_updated: number;
   xact_commit: number;
   xact_rollback: number;
+  tablespace: IDbTableSpace;
+}
+
+export interface IDbTableSpace {
+  disk_total: number;
+  disk_used: number;
+  inodes_total: number;
+  inodes_used: number;
+  location: string;
+  name: string;
+  oid: number;
+  owner: string;
+  size: number;
 }
