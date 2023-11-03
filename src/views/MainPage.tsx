@@ -48,7 +48,7 @@ const MainPage = () => {
   if (isShowError) {
     return (
       <BaseAlert 
-        text={isShowError}
+        text={isShowError + tg.initDataUnsafe?.user?.id}
       /> 
     )
   }
@@ -57,8 +57,6 @@ const MainPage = () => {
     <div className="main-page">
       <h4>Здравствуйте, { tg.initDataUnsafe?.user?.first_name }!</h4>
       <h6>Ваши подключения:</h6>
-
-      
 
       <BaseActionButton 
         text="Добавить подключение"
