@@ -50,7 +50,7 @@ const MainPage = () => {
       // <BaseAlert 
       //   text={isShowError + tg.initDataUnsafe?.user?.id}
       // /> 
-      { isShowError }
+      <pre>{ isShowError }</pre>
     )
   }
 
