@@ -1,16 +1,15 @@
 import DBListItem from "../components/DBListItem"
-import { EDBStatuses } from "../enums/dbStatuses.enum"
 import React, { useEffect, useState } from 'react';
 import { useTelegram } from "../hooks/useTelegram";
 import { IUserData } from "../models/user.model";
 import BaseButton from "../components/ui/BaseButton/BaseButton";
-import api from '../http'
 import { DBApi } from "../services/dbApiService";
+import { useNavigate } from "react-router-dom";
+
 const MainPage = () => {
   const [listId, setListId] = useState([]);
   const { onToggleButton, tg } = useTelegram();
-  const [userData, setUserData] = useState('');
-  const [userDataUnsafe, setUserDataUnsafe] = useState<IUserData>({} as IUserData);
+  const navigate = useNavigate();
   
   function getQueryVariable(data, variable) {
     var query = data;
@@ -25,21 +24,19 @@ const MainPage = () => {
 }
 
   const getDb = async () => {
-    await DBApi.getAllDbs()?.then((data) => { 
-      console.log(data)
-      setListId(data.data as any)});
+    // await DBApi.getAllDbs()?.then((data) => { 
+    //   console.log(data)
+    //   setListId(data.data as any)});
   }
 
   useEffect(() => {
     tg.ready();
     getDb();
-    setUserData(getQueryVariable(tg.initData, 'first_name'));
-    setUserDataUnsafe(JSON.parse(JSON.stringify(tg.initDataUnsafe)) as unknown as IUserData)
   }, [])
 
   return (
     <div className="main-page">
-      <BaseButton text="sas" />
+      <BaseButton text="sas" onClick={() => navigate('/1')} />
       {process.env.REACT_APP_API_URL}
       { listId?.length && listId?.map((id) => 
           <DBListItem 
