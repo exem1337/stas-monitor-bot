@@ -39,6 +39,7 @@ const MainPage = () => {
 
   return (
     <div className="main-page">
+      {JSON.stringify(listId)}
       { listId?.length && listId?.map((id) => 
           <DBListItem 
             id={id.active_time} 
