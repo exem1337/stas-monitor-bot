@@ -10,7 +10,7 @@ const MainPage = () => {
   const [userDataUnsafe, setUserDataUnsafe] = useState('');
   useEffect(() => {
     tg.ready();
-    setUserData(JSON.stringify(tg.initData));
+    setUserData(JSON.parse(tg.initData)?.first_name);
     setUserDataUnsafe(JSON.stringify(tg.initDataUnsafe))
   }, [])
 
