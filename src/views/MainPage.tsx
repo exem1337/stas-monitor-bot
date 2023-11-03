@@ -25,7 +25,7 @@ const MainPage = () => {
   useEffect(() => {
     tg.ready();
     setUserData(getQueryVariable(tg.initData, 'first_name'));
-    setUserDataUnsafe(JSON.parse(tg.initDataUnsafe) as unknown as IUserData)
+    setUserDataUnsafe(JSON.parse(JSON.stringify(tg.initDataUnsafe)) as unknown as IUserData)
   }, [])
 
   return (
