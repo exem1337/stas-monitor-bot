@@ -1,0 +1,17 @@
+.add-db {
+  h4 {
+    margin-bottom: 32px;
+  }
+
+  .base-input {
+    margin-bottom: 16px;
+
+    &:last-of-type {
+      margin-bottom: 32px;
+    }
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

@@ -1,10 +1,10 @@
 import DBListItem from "../components/DBListItem"
 import React, { useEffect, useState } from 'react';
 import { useTelegram } from "../hooks/useTelegram";
-import { IUserData } from "../models/user.model";
-import BaseButton from "../components/ui/BaseButton/BaseButton";
+import { AiOutlinePlus } from 'react-icons/ai'
 import { DBApi } from "../services/dbApiService";
 import { useNavigate } from "react-router-dom";
+import BaseActionButton, { BaseActionButtonSlot } from "../components/ui/ActionButton/BaseActionButton";
 
 const MainPage = () => {
   const [listId, setListId] = useState([]);
@@ -38,7 +38,16 @@ const MainPage = () => {
     <div className="main-page">
       <h4>Здравствуйте, { tg.initDataUnsafe?.user?.first_name }!</h4>
       <h6>Ваши подключения:</h6>
-      
+
+      <BaseActionButton 
+        text="Добавить подключение"
+        handler={() => navigate('/add')}
+      >
+        <BaseActionButtonSlot>
+          <AiOutlinePlus />
+        </BaseActionButtonSlot>
+      </BaseActionButton>
+
       { listId?.length && listId?.map((id) => 
           <DBListItem 
             id={id.active_time} 

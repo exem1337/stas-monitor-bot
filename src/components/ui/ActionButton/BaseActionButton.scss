@@ -1,0 +1,25 @@
+@import "../ui-kit.scss";
+
+.base-action-button {
+  color: var(--tg-theme-button-color);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: $transition-speed;
+  font-weight: 500;
+  width: fit-content;
+
+  &:hover {
+    color: $hover-color;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    color: $disabled-color;
+  }
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+}

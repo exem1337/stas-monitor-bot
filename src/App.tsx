@@ -8,11 +8,13 @@ import {
 import MyDB from "./views/MyDB";
 import MainPage from "./views/MainPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AddDBPage from "./views/AddDbPage";
 
 const App = () => {
   const routes = useRoutes([
     { path: '/', element: <MainPage /> },
-    { path: '/:id', element: <MyDB/> }
+    { path: '/:id', element: <MyDB/> },
+    { path: '/add', element: <AddDBPage /> }
   ])
 
   return routes;
