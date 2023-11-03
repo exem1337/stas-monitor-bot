@@ -23,6 +23,14 @@ const MainPage = () => {
   useEffect(() => {
     tg.ready();
     getDb();
+    tg.MainButton.show();
+    tg.MainButton.setParams({
+      text: 'Добавить подключение'
+    })
+
+    return () => {
+      tg.MainButton.hide();
+    }
   }, [])
 
   if (isLoading) {
@@ -38,7 +46,7 @@ const MainPage = () => {
       <h4>Здравствуйте, { user?.first_name }!</h4>
       <h6>Ваши подключения:</h6>
 
-      <BaseActionButton 
+      {/* <BaseActionButton 
         text="Добавить подключение"
         className="add-connection"
         handler={() => navigate('/add')}
@@ -46,7 +54,7 @@ const MainPage = () => {
         <BaseActionButtonSlot>
           <AiOutlinePlus />
         </BaseActionButtonSlot>
-      </BaseActionButton>
+      </BaseActionButton> */}
 
       { dbs?.length && dbs?.map((db, key) => 
         <div className="main-page--db" key={key}>
