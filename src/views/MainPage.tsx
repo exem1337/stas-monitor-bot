@@ -47,7 +47,7 @@ const MainPage = () => {
   if (isShowError) {
     return (
       <BaseAlert 
-        text="Произошла ошибка при загрузке данных" 
+        text={`Произошла ошибка при загрузке данных ${tg.initDataUnsafe?.user?.id}`} 
       /> 
     )
   }
@@ -57,7 +57,7 @@ const MainPage = () => {
       <h4>Здравствуйте, { tg.initDataUnsafe?.user?.first_name }!</h4>
       <h6>Ваши подключения:</h6>
 
-      {tg.initDataUnsafe?.user?.id}
+      
 
       <BaseActionButton 
         text="Добавить подключение"
