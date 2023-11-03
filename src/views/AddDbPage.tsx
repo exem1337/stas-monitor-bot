@@ -24,7 +24,7 @@ const AddDBPage = () => {
   const onCreateConnection = async () => {
     setIsLoading(true);
     await DBApi.createConnection({
-      telegram_id: tg.initDataUnsafe?.user?.id,
+      telegram_id: tg.initDataUnsafe?.user?.id?.toString(),
       host: form.host,
       port: form.port,
       username: form.login,
