@@ -28,7 +28,8 @@ const AddDBPage = () => {
       host: form.host,
       port: form.port,
       username: form.login,
-      name: form.name
+      name: form.name,
+      password: form.password
     })
     setIsLoading(false);
   }

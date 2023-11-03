@@ -24,9 +24,10 @@ const MainPage = () => {
 }
 
   const getDb = async () => {
-    // await DBApi.getAllDbs()?.then((data) => { 
-    //   console.log(data)
-    //   setListId(data.data as any)});
+    await DBApi.getAllDbs()?.then((data) => { 
+        setListId(data.data as any)
+      }
+    );
   }
 
   useEffect(() => {
