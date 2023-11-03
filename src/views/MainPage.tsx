@@ -1,10 +1,8 @@
 import DBListItem from "../components/DBListItem"
 import React, { useEffect, useState } from 'react';
 import { useTelegram } from "../hooks/useTelegram";
-import { AiOutlinePlus } from 'react-icons/ai'
 import { DBApi } from "../services/dbApiService";
 import { useNavigate } from "react-router-dom";
-import BaseActionButton, { BaseActionButtonSlot } from "../components/ui/ActionButton/BaseActionButton";
 import { IDatabaseHost } from "../models/db.model";
 import { Spinner } from "react-bootstrap";
 
@@ -20,6 +18,10 @@ const MainPage = () => {
     setIsLoading(false);
   }
 
+  const onGoToAdd = () => {
+    navigate('/add');
+  }
+
   useEffect(() => {
     tg.ready();
     getDb();
@@ -33,6 +35,13 @@ const MainPage = () => {
     }
   }, [])
 
+  useEffect(() => {
+    tg.onEvent('mainButtonClicked', onGoToAdd)
+    return () => {
+      tg.offEvent('mainButtonClicked', onGoToAdd);
+    }
+  }, [onGoToAdd])
+
   if (isLoading) {
     return (
       <div className="app-loader">
@@ -45,16 +54,6 @@ const MainPage = () => {
     <div className="main-page">
       <h4>Здравствуйте, { user?.first_name }!</h4>
       <h6>Ваши подключения:</h6>
-
-      {/* <BaseActionButton 
-        text="Добавить подключение"
-        className="add-connection"
-        handler={() => navigate('/add')}
-      >
-        <BaseActionButtonSlot>
-          <AiOutlinePlus />
-        </BaseActionButtonSlot>
-      </BaseActionButton> */}
 
       { dbs?.length && dbs?.map((db, key) => 
         <div className="main-page--db" key={key}>
