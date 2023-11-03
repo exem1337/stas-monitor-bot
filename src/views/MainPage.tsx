@@ -10,13 +10,13 @@ const MainPage = () => {
   const [userDataUnsafe, setUserDataUnsafe] = useState('');
   useEffect(() => {
     tg.ready();
-    setUserData(JSON.parse(tg.initData)?.first_name);
+    setUserData(tg.initData);
     setUserDataUnsafe(JSON.stringify(tg.initDataUnsafe))
   }, [])
 
   return (
     <div className="main-page">
-      {userData}
+      {(JSON.parse(userData))?.first_name}
       {userDataUnsafe}
       { listId.map((id) => 
           <DBListItem 
