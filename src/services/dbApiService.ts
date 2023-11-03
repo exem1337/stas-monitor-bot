@@ -2,7 +2,7 @@ import api from '../http';
 
 export class DBApi {
   public static async getAllDbs(telegramId: string) {
-    return await api.get('https://jsonplaceholder.typicode.com/posts')
+    return await api.post('/monitoring/fullHostsDbList/592957413')
   }
 
   public static async createConnection(connection) {
