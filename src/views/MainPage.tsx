@@ -24,7 +24,7 @@ const MainPage = () => {
 }
 
   const getDb = async () => {
-    await DBApi.getAllDbs()?.then((data) => { 
+    await DBApi.getAllDbs(592957413)?.then((data) => { 
         setListId(data.data as any)
       }
     );
