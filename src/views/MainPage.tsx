@@ -18,18 +18,13 @@ const MainPage = () => {
   
   const getDb = async () => {
     setIsLoading(true);
-    try {
       await DBApi.getAllDbs(tg.initDataUnsafe?.user?.id)?.then((data) => { 
         setDbs(data.data as any)
-      }).catch(err => setIsShowError(JSON.stringify(err)));
-    }
-    catch (error) {
-      console.log(error);
-      // setIsShowError(JSON.stringify(error));
-    }
-    finally {
+      })
+
+
       setIsLoading(false);
-    }
+    
   }
 
   useEffect(() => {
@@ -42,15 +37,6 @@ const MainPage = () => {
       <div className="app-loader">
         <Spinner />
       </div>
-    )
-  }
-
-  if (isShowError) {
-    return (
-      // <BaseAlert 
-      //   text={isShowError + tg.initDataUnsafe?.user?.id}
-      // /> 
-      <pre>{ isShowError }</pre>
     )
   }
 
