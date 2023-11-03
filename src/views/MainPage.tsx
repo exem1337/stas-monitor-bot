@@ -47,9 +47,10 @@ const MainPage = () => {
 
   if (isShowError) {
     return (
-      <BaseAlert 
-        text={isShowError + tg.initDataUnsafe?.user?.id}
-      /> 
+      // <BaseAlert 
+      //   text={isShowError + tg.initDataUnsafe?.user?.id}
+      // /> 
+      { isShowError }
     )
   }
 
