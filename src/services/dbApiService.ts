@@ -2,7 +2,7 @@ import api from '../http';
 
 export class DBApi {
   public static async getAllDbs(telegramId: string) {
-    return await api.get(`/monitoring/fullHostsDbList/${telegramId?.replace('"', '')}`)
+    return await api.get(`/monitoring/fullHostsDbList/${telegramId}`)
   }
 
   public static async createConnection(connection) {
