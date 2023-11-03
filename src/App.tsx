@@ -13,6 +13,7 @@ const App = () => {
     { path: '/', element: <MainPage /> },
     { path: '/:id', element: <MyDB/> }
   ])
+
   return routes;
 }
 
