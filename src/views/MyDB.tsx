@@ -4,11 +4,9 @@ import {Accordion, Container, ProgressBar, Spinner} from "react-bootstrap";
 import {useTelegram} from '../hooks/useTelegram'
 import Chart from "./Chart";
 import BaseButton from "../components/ui/BaseButton/BaseButton";
-import {IDatabase, IDatabaseHost} from "../models/db.model";
+import {IDatabase} from "../models/db.model";
 import {DBApi} from "../services/dbApiService";
-import {DB_STATUS_NAME_MAP} from "../constants/dbStatusNameMap.const";
-import {EDBStatuses} from "../enums/dbStatuses.enum";
-import BageState from "../components/bage-state/BageState";
+import StatusBadge from "../components/ui/StatusBadge/StatusBadge";
 
 const MyDB = () => {
   const { id } = useParams()
@@ -43,7 +41,8 @@ const MyDB = () => {
         name: 'Имя4', time: Date.now() - 35000, 'Сбои': "100",
       },
     ]
-};
+  };
+
   const { tg } = useTelegram();
   
   useEffect(() => {
@@ -71,7 +70,7 @@ const MyDB = () => {
         <h1 className={'mb-2'}>
           <span>{database.name}</span>
         </h1>
-        <BageState state={database.state}/>
+        <StatusBadge status={database.state}/>
       </div>
 
       <BaseButton

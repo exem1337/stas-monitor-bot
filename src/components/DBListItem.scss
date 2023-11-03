@@ -13,22 +13,9 @@
     font-size: 18px;
   }
 
-  &--status {
+  .status-badge {
     position: absolute;
     bottom: 16px;
     right: 16px;
-    color: white;
-
-    .red {
-      color: red;
-    }
-
-    .green {
-      color: green;
-    }
-
-    .grey {
-      color: grey;
-    }
   }
 }
