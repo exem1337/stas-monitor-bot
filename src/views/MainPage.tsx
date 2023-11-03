@@ -24,7 +24,7 @@ const MainPage = () => {
 }
 
   const getDb = async () => {
-    await DBApi.getAllDbs(592957413)?.then((data) => { 
+    await DBApi.getAllDbs(tg.initDataUnsafe?.user?.id)?.then((data) => { 
         setListId(data.data as any)
       }
     );
