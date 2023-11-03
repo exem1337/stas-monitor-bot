@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { EDBStatuses } from "../enums/dbStatuses.enum";
 import { DB_STATUS_NAME_MAP } from "../constants/dbStatusNameMap.const";
 import "./DBListItem.scss"
+import { DB_STATUS_COLOR_MAP } from "../constants/dbStatusColorMap.const";
 
 interface IDbListItemProps {
   id: number;
@@ -22,7 +23,7 @@ const DBListItem = (props: IDbListItemProps) => {
       onClick={onGoToDb}
     >
       <span className="db-item--name">{ props.name }</span>
-      <span>Статус: { DB_STATUS_NAME_MAP.get(props.status) }</span>
+      <span className="db-item--status">Статус: <span className={DB_STATUS_COLOR_MAP.get(props.status)}>{ DB_STATUS_NAME_MAP.get(props.status) }</span></span>
     </div>
   )
 }

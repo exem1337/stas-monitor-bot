@@ -1,14 +1,34 @@
 .db-item {
-  background-color: #ececec;
+  background-color: var(--tg-theme-bg-color);
   height: 100px;
   width: 100%;
   border-radius: 8px;
   margin-bottom: 16px;
   padding: 16px;
+  position: relative;
 
   &--name {
     color: white;
     font-weight: 500;
     font-size: 18px;
+  }
+
+  &--status {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    color: white;
+
+    .red {
+      color: red;
+    }
+
+    .green {
+      color: green;
+    }
+
+    .grey {
+      color: grey;
+    }
   }
 }
