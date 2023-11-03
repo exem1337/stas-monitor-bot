@@ -26,10 +26,6 @@ const MyDB = () => {
     needLoader && setIsLoading(false);
   }
 
-   useEffect(() => {
-      getDbInfo();
-   }, [])
-
   const db = {
     id: 1,
     name: "Имя",
@@ -52,6 +48,7 @@ const MyDB = () => {
   
   useEffect(() => {
     tg.ready();
+    getDbInfo();
 
     return () => {
       clearInterval(interval);
