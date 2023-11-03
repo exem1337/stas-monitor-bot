@@ -2,13 +2,14 @@
 
 .base-button {
   color: $button-text-color;
-  background-color: $base-color;
+  background-color: var(--tg-theme-button-color);
   transition: $transition-speed;
   display: flex;
   align-items: center;
   max-height: 32px;
   position: relative;
   transition: opacity $transition-speed ease;
+  --l:50%;
 
   &--content {
     opacity: 1;
@@ -23,7 +24,7 @@
   }
 
   &:hover {
-    background-color: $hover-color;
+    background-color: unquote("hsla(var(--tg-theme-button-color), 50%)")
   }
 
   &:active {
