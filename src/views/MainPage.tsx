@@ -36,7 +36,9 @@ const MainPage = () => {
 
   return (
     <div className="main-page">
-      <h4>Здравствуйте, { tg.initDataUnsafe?.user?.first_name }! Ваши подключения</h4>
+      <h4>Здравствуйте, { tg.initDataUnsafe?.user?.first_name }!</h4>
+      <h6>Ваши подключения:</h6>
+      
       { listId?.length && listId?.map((id) => 
           <DBListItem 
             id={id.active_time} 
