@@ -7,6 +7,6 @@ $transition-speed: .3s;
 $validation-error: #dc3545;
 $text-black: #1f1f1f;
 
-.spinner-border.text-primary {
-  color: $base-color !important;
+.spinner-border {
+  color: var(--tg-theme-button-color) !important;
 }

@@ -16,3 +16,18 @@ body {
 .app-wrapper {
   padding: 16px;
 }
+
+.app-loader {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .spinner-border {
+    --bs-spinner-width: 4rem;
+    --bs-spinner-height: 4rem;
+  }
+}

@@ -1,4 +1,6 @@
 .main-page {
+  position: relative;
+
   h6 {
     margin-bottom: 32px;
   }
@@ -20,5 +22,11 @@
       margin-bottom: 16px;
       border-bottom: 1px solid #f2f5f4;
     }
+  }
+
+  .add-connection {
+    position: absolute;
+    top: 16px;
+    right: 16px;
   }
 }
