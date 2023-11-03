@@ -5,6 +5,7 @@ import { useValidationForm } from "../components/ui/utils/useValidationForm"
 import { Validators } from "../components/ui/validators/validators.util"
 import { useTelegram } from '../hooks/useTelegram'
 import { DBApi } from "../services/dbApiService"
+import { useNavigate } from "react-router-dom"
 
 const AddDBPage = () => {
   const [isValid, form, setForm] = useValidationForm({
@@ -14,8 +15,9 @@ const AddDBPage = () => {
     login: '',
     password: '',
   })
-  const { close, tg } = useTelegram();
+  const { tg } = useTelegram();
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     tg.ready();
@@ -37,6 +39,13 @@ const AddDBPage = () => {
   return (
     <div className="add-db">
       <h4>Создание нового подключения</h4>
+
+      <BaseButton
+        text="Назад"
+        className="back-button"
+        onClick={() => navigate('/')}
+      />
+
       <BaseInput 
         validation={Validators.required()}
         label="Название подключения"

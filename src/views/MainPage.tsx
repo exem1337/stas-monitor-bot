@@ -25,15 +25,24 @@ const MainPage = () => {
   useEffect(() => {
     tg.ready();
     getDb();
-    tg.MainButton.show();
-    tg.MainButton.setParams({
-      text: 'Добавить подключение'
-    })
+  }, [])
+
+  useEffect(() => {
+    if (isLoading) {
+      tg.MainButton.hide();
+    }
+    else {
+      tg.MainButton.show();
+      tg.MainButton.setParams({
+        text: '+ Добавить подключение'
+      })
+  
+    }
 
     return () => {
       tg.MainButton.hide();
     }
-  }, [])
+  }, [isLoading])
 
   useEffect(() => {
     tg.onEvent('mainButtonClicked', onGoToAdd)
