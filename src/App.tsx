@@ -2,8 +2,9 @@ import "./App.scss";
 import { useEffect } from "react";
 import { useTelegram } from "./hooks/useTelegram";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Main from "./components/Main";
 import MyDB from "./components/MyDB";
+import Header from "./components/header/Header";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const { onToggleButton, tg } = useTelegram();
@@ -17,11 +18,11 @@ function App() {
 
   return (
     <div className="App">
-      Hi
+      <Header/>
       <BrowserRouter>
 
         <Routes>
-          <Route path={"/"} element={<Main/>}/>
+         
           {ListId.map((id, index)=>
               <Route key={index} path={`/${id}`} element={<MyDB id={id}/>}/>
           )}
