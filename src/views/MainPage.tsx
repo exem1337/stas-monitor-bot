@@ -5,16 +5,23 @@ import { DBApi } from "../services/dbApiService";
 import { useNavigate } from "react-router-dom";
 import { IDatabaseHost } from "../models/db.model";
 import { Spinner } from "react-bootstrap";
+import BaseAlert from "../components/ui/BaseAlert/BaseAlert";
 
 const MainPage = () => {
   const [dbs, setDbs] = useState<Array<IDatabaseHost>>([]);
   const { tg, user } = useTelegram();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
-  
+
   const getDb = async () => {
-    setIsLoading(true);
-    setDbs(await DBApi.getAllDbs(user?.id));
+    try {
+      setIsLoading(true);
+      setDbs(await DBApi.getAllDbs(user?.id));
+    }
+    catch (error) {
+      setError(error);
+    }
     setIsLoading(false);
   }
 
@@ -28,7 +35,7 @@ const MainPage = () => {
   }, [])
 
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading || error) {
       tg.MainButton.hide();
     }
     else {
@@ -56,6 +63,12 @@ const MainPage = () => {
       <div className="app-loader">
         <Spinner />
       </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <BaseAlert text="Произошла ошибка при получении списка подключений" />
     )
   }
 
