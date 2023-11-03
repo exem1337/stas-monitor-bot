@@ -5,29 +5,17 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { DBApi } from "../services/dbApiService";
 import { useNavigate } from "react-router-dom";
 import BaseActionButton, { BaseActionButtonSlot } from "../components/ui/ActionButton/BaseActionButton";
+import { IDbHost } from "../models/db.model";
 
 const MainPage = () => {
-  const [listId, setListId] = useState([]);
+  const [dbs, setDbs] = useState<Array<IDbHost>>([]);
   const { onToggleButton, tg } = useTelegram();
   const navigate = useNavigate();
   
-  function getQueryVariable(data, variable) {
-    var query = data;
-    var vars = query.split('&');
-    for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split('=');
-        if (decodeURIComponent(pair[0]) == variable) {
-            return decodeURIComponent(pair[1]);
-        }
-    }
-    console.log('Query variable %s not found', variable);
-}
-
   const getDb = async () => {
-    await DBApi.getAllDbs(tg.initDataUnsafe?.user?.id)?.then((data) => { 
-        setListId(data.data as any)
-      }
-    );
+    await DBApi.getAllDbs(592957413)?.then((data) => { 
+      setDbs(data.data as any)
+    });
   }
 
   useEffect(() => {
@@ -49,13 +37,18 @@ const MainPage = () => {
         </BaseActionButtonSlot>
       </BaseActionButton>
 
-      { listId?.length && listId?.map((id) => 
-          <DBListItem 
-            id={id.active_time} 
-            key={id.active_time} 
-            name={id.name} 
-            status={id.state} 
-          />
+      { dbs?.length && dbs?.map((db, key) => 
+        <div className="main-page--db" key={key}>
+          <p className="main-page--db__host">{ db.host }</p>
+          { db.databases && db.databases?.map((database, index) => 
+            <DBListItem 
+              id={database.name} 
+              key={index} 
+              name={database.name} 
+              status={database.state} 
+            />
+          ) }
+        </div>
         )
       }
     </div>
