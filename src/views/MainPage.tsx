@@ -8,9 +8,22 @@ const MainPage = () => {
   const { onToggleButton, tg } = useTelegram();
   const [userData, setUserData] = useState('');
   const [userDataUnsafe, setUserDataUnsafe] = useState('');
+
+  function getQueryVariable(data, variable) {
+    var query = data;
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    console.log('Query variable %s not found', variable);
+}
+
   useEffect(() => {
     tg.ready();
-    setUserData(tg.initData);
+    setUserData(getQueryVariable(tg.initData, 'first_name'));
     setUserDataUnsafe(JSON.stringify(tg.initDataUnsafe))
   }, [])
 
