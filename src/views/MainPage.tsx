@@ -11,7 +11,7 @@ const MainPage = () => {
   useEffect(() => {
     tg.ready();
     console.log(tg.initData, tg.initDataUnsafe)
-    setUserData(JSON.stringify(tg.initData));
+    setUserData(JSON.stringify(tg.initDataUnsafe));
   }, [])
 
   return (
