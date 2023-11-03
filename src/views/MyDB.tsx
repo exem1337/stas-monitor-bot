@@ -8,6 +8,7 @@ import {IDatabase, IDatabaseHost} from "../models/db.model";
 import {DBApi} from "../services/dbApiService";
 import {DB_STATUS_NAME_MAP} from "../constants/dbStatusNameMap.const";
 import {EDBStatuses} from "../enums/dbStatuses.enum";
+import BageState from "../components/bage-state/BageState";
 
 const MyDB = () => {
    const {id} = useParams()
@@ -58,22 +59,22 @@ const MyDB = () => {
       )
    }
 
-   const getColor = () => {
-      let color = '';
-      switch (database.state){
-         case EDBStatuses.Online:
-            color = 'green';
-            break
-         case EDBStatuses.Offline:
-            color = 'yellow';
-            break
-         case EDBStatuses.Error:
-            color = 'red';
-            break
-         default: color = 'red';
-      }
-      return {borderColor: color, color: color}
-   }
+   // const getColor = () => {
+   //    let color = '';
+   //    switch (database.state){
+   //       case EDBStatuses.Online:
+   //          color = 'green';
+   //          break
+   //       case EDBStatuses.Offline:
+   //          color = 'yellow';
+   //          break
+   //       case EDBStatuses.Error:
+   //          color = 'red';
+   //          break
+   //       default: color = 'red';
+   //    }
+   //    return {borderColor: color, color: color}
+   // }
 
    return (
       <Container className="my-db">
@@ -81,7 +82,7 @@ const MyDB = () => {
             <h1 className={'mb-2'}>
                <span>{database.name}</span>
             </h1>
-            <span className={'ms-2 my-db--status'} style={getColor()}>{DB_STATUS_NAME_MAP.get(database.state)}</span>
+            <BageState state={database.state}/>
          </div>
          <BaseButton text="Назад"/>
 
