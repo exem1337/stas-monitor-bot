@@ -7,16 +7,17 @@ const MainPage = () => {
   const listId: Array<number> = [3,4,5,6,7,788];
   const { onToggleButton, tg } = useTelegram();
   const [userData, setUserData] = useState('');
-  
+  const [userDataUnsafe, setUserDataUnsafe] = useState('');
   useEffect(() => {
     tg.ready();
-    console.log(tg.initData, tg.initDataUnsafe)
-    setUserData(JSON.stringify(tg.initDataUnsafe));
+    setUserData(JSON.stringify(tg.initData));
+    setUserDataUnsafe(JSON.stringify(tg.initDataUnsafe))
   }, [])
 
   return (
     <div className="main-page">
       {userData}
+      {userDataUnsafe}
       { listId.map((id) => 
           <DBListItem 
             id={id} 
