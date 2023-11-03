@@ -2,7 +2,6 @@ import "./App.scss";
 import { useEffect } from "react";
 import { useTelegram } from "./hooks/useTelegram";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Main from "./components/Main";
 import MyDB from "./components/MyDB";
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
       <BrowserRouter>
 
         <Routes>
-          <Route path={"/"} element={<Main/>}/>
           {ListId.map((id, index)=>
               <Route key={index} path={`/${id}`} element={<MyDB id={id}/>}/>
           )}
