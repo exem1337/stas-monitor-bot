@@ -4,26 +4,31 @@ import {Accordion, Container, ProgressBar, Spinner} from "react-bootstrap";
 import {useTelegram} from '../hooks/useTelegram'
 import Chart from "./Chart";
 import BaseButton from "../components/ui/BaseButton/BaseButton";
-import { IDatabase } from "../models/db.model";
-import { DBApi } from "../services/dbApiService";
+import {IDatabase, IDatabaseHost} from "../models/db.model";
+import {DBApi} from "../services/dbApiService";
+import {DB_STATUS_NAME_MAP} from "../constants/dbStatusNameMap.const";
+import {EDBStatuses} from "../enums/dbStatuses.enum";
+import BageState from "../components/bage-state/BageState";
 
 const MyDB = () => {
   const { id } = useParams()
   const navigate = useNavigate();
   const [database, setDatabase] = useState<IDatabase>({} as IDatabase);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const interval = setInterval(() => {
     getDbInfo(false);
   }, 30000)
+
   const getDbInfo = async (needLoader = true) => {
     needLoader && setIsLoading(true);
     setDatabase(await DBApi.getDb(Number(id)));
     needLoader && setIsLoading(false);
   }
 
-  useEffect(() => {
-    getDbInfo();
-  }, [])
+   useEffect(() => {
+      getDbInfo();
+   }, [])
 
   const db = {
     id: 1,
@@ -65,10 +70,16 @@ const MyDB = () => {
 
   return (
     <Container className="my-db">
-      <h1>{database.name}</h1>
-      <BaseButton 
-        text="Назад" 
-        className="back-button" 
+      <div className={'d-flex align-items-center'}>
+        <h1 className={'mb-2'}>
+          <span>{database.name}</span>
+        </h1>
+        <BageState state={database.state}/>
+      </div>
+
+      <BaseButton
+        text="Назад"
+        className="back-button"
         onClick={() => navigate('/')}
       />
 
