@@ -24,7 +24,7 @@ const Chart = (props) => {
     });
   return (
     <div className={styles.container__bloc}>
-      { tg?.ThemeParams?.button_color + 'sas'}
+      { tg?.ThemeParams}
       <ResponsiveContainer
         width="100%"
         height={200}
