@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 import MyDB from "./views/MyDB";
 import MainPage from "./views/MainPage";
+import Header from "./components/header/Header";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const routes = useRoutes([
@@ -32,6 +34,7 @@ const AppWrapper = () => {
     <Router>
       <div className='flex-grow-1'>
         <div className="app-wrapper ">
+            <Header/>
           <App />
         </div>
       </div>
