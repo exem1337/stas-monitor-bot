@@ -21,11 +21,11 @@ const MainPage = () => {
     try {
       await DBApi.getAllDbs(tg.initDataUnsafe?.user?.id)?.then((data) => { 
         setDbs(data.data as any)
-      });
+      }).catch(err => setIsShowError(err));
     }
     catch (error) {
       console.log(error);
-      setIsShowError(JSON.stringify(error));
+      // setIsShowError(JSON.stringify(error));
     }
     finally {
       setIsLoading(false);
