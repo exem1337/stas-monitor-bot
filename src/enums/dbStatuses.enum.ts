@@ -1,5 +1,5 @@
 export enum EDBStatuses {
-  Online = 'online',
-  Offline = 'offline',
+  Online = 'active',
+  Offline = 'idle',
   Error = 'error',
 }

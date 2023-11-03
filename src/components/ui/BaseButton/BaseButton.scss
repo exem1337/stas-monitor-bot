@@ -2,7 +2,7 @@
 
 .base-button {
   color: $button-text-color;
-  background-color: var(--tg-theme-button-color);
+  background-color: var(--tg-theme-button-color) !important;
   transition: $transition-speed;
   display: flex;
   align-items: center;

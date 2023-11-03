@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import MyDB from "./views/MyDB";
 import MainPage from "./views/MainPage";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const routes = useRoutes([
