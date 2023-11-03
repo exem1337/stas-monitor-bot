@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styles from "../components/MyDb/my-db-style.module.scss";
-import {Container} from "react-bootstrap";
-import {Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import {Accordion, Container, ProgressBar} from "react-bootstrap";
 import {useTelegram} from '../hooks/useTelegram'
 import Chart from "./Chart";
 
@@ -27,18 +25,34 @@ const MyDB = () => {
     ]
 };
   const {onToggleButton, tg} = useTelegram();
+  
   useEffect(() => {
     tg.ready();
   }, []);
 
+  const now = 60;
+
   return (
-     <Container>
-       <h1>{db.name}</h1>
-       ID = {db.id}
-       <div className={`${styles.container}`}>
-         <Chart data={db.data}/>
-       </div>
-     </Container>
+    <Container className="my-db">
+      <h1>{db.name}</h1>
+      <span>Занято дискового пространства</span>
+      <ProgressBar now={now} label={`${now}%`} />
+      
+      <Accordion defaultActiveKey="0">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>Количество активных сессий</Accordion.Header>
+          <Accordion.Body>
+            <Chart data={db.data}/>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>Количество транзакций</Accordion.Header>
+          <Accordion.Body>
+            <Chart data={db.data}/>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+    </Container>
   );
 };
 

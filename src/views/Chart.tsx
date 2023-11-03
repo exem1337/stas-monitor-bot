@@ -12,9 +12,11 @@ import { useTelegram } from "../hooks/useTelegram";
 
 const Chart = (props) => {
   const { onToggleButton, tg } = useTelegram();
+
   useEffect(() => {
     tg.ready();
   }, []);
+  
   const tickFormatter = (value: number) =>
     new Date(value).toLocaleDateString("en-US", {
       year: "numeric",
@@ -22,7 +24,9 @@ const Chart = (props) => {
       day: "numeric",
       hour: "numeric",
       minute: "numeric",
-    });
+    }
+  );
+  
   return (
     <div className={styles.container__bloc}>
       <ResponsiveContainer

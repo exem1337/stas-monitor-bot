@@ -1,0 +1,9 @@
+.my-db {
+  .progress {
+    margin-bottom: 32px;
+    
+    &-bar {
+      background-color: var(--tg-theme-button-color);
+    }
+  }
+}
