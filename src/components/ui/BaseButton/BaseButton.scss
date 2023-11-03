@@ -10,6 +10,8 @@
   position: relative;
   transition: opacity $transition-speed ease;
   --l:50%;
+  display: flex;
+  justify-content: center;
 
   &--content {
     opacity: 1;
