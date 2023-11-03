@@ -1,0 +1,19 @@
+@import '../ui-kit.scss';
+
+.base-input {
+  input {
+    &:focus {
+      border: 1px solid $base-color !important;
+      box-shadow: 0 0 0.05rem $base-color !important;
+    }
+  }
+
+  .invalid-feedback {
+    display: block !important;
+  }
+
+  &:has(.invalid-feedback) input {
+    border: 1px solid $validation-error !important;
+    box-shadow: 0 0 0.05rem $validation-error !important;
+  }
+}

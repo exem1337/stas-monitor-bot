@@ -1,0 +1,12 @@
+$base-color: var(--tg-theme-button-color);
+$button-text-color: white;
+$secondary-color: lightblue;
+$hover-color: darken($base-color, 20%);
+$disabled-color: lighten($base-color, 20%);
+$transition-speed: .3s;
+$validation-error: #dc3545;
+$text-black: #1f1f1f;
+
+.spinner-border.text-primary {
+  color: $base-color !important;
+}

@@ -3,6 +3,7 @@ import { EDBStatuses } from "../enums/dbStatuses.enum"
 import React, { useEffect, useState } from 'react';
 import { useTelegram } from "../hooks/useTelegram";
 import { IUserData } from "../models/user.model";
+import BaseButton from "../components/ui/BaseButton/BaseButton";
 
 const MainPage = () => {
   const listId: Array<number> = [3,4,5,6,7,788];
@@ -40,6 +41,7 @@ const MainPage = () => {
           />
         )
       }
+      <BaseButton text="Кнопка" />
     </div>
   )
 }
