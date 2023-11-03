@@ -7,19 +7,28 @@ import { useNavigate } from "react-router-dom";
 import BaseActionButton, { BaseActionButtonSlot } from "../components/ui/ActionButton/BaseActionButton";
 import { IDbHost } from "../models/db.model";
 import { Spinner } from "react-bootstrap";
+import BaseAlert from "../components/ui/BaseAlert/BaseAlert";
 
 const MainPage = () => {
   const [dbs, setDbs] = useState<Array<IDbHost>>([]);
   const { onToggleButton, tg } = useTelegram();
   const [isLoading, setIsLoading] = useState(true);
+  const [isShowError, setIsShowError] = useState(false);
   const navigate = useNavigate();
   
   const getDb = async () => {
     setIsLoading(true);
-    await DBApi.getAllDbs(tg.initDataUnsafe?.user?.id)?.then((data) => { 
-      setDbs(data.data as any)
-    });
-    setIsLoading(false);
+    try {
+      await DBApi.getAllDbs(tg.initDataUnsafe?.user?.id)?.then((data) => { 
+        setDbs(data.data as any)
+      });
+    }
+    catch (error) {
+      setIsShowError(true);
+    }
+    finally {
+      setIsLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -32,6 +41,14 @@ const MainPage = () => {
       <div className="app-loader">
         <Spinner />
       </div>
+    )
+  }
+
+  if (isShowError) {
+    return (
+      <BaseAlert 
+        text="Произошла ошибка при загрузке данных" 
+      /> 
     )
   }
 
