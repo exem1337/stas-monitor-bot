@@ -24,7 +24,8 @@ const MainPage = () => {
       });
     }
     catch (error) {
-      setIsShowError(error);
+      console.log(error);
+      setIsShowError(JSON.stringify(error));
     }
     finally {
       setIsLoading(false);
