@@ -2,11 +2,26 @@ import "./App.scss";
 import { useEffect } from "react";
 import { useTelegram } from "./hooks/useTelegram";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import MyDB from "./components/MyDB";
+import DBListItem from "./components/DBListItem";
+import { EDBStatuses } from "./enums/dbStatuses.enum";
+import {
+  BrowserRouter as Router,
+  useRoutes,
+} from "react-router-dom";
+import MyDB from "./views/MyDB";
+import MainPage from "./views/MainPage";
 import Header from "./components/header/Header";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+const App = () => {
+  const routes = useRoutes([
+    { path: '/', element: <MainPage /> },
+    { path: '/:id', element: <MyDB /> }
+  ])
+  return routes;
+}
+
+const AppWrapper = () => {
   const { onToggleButton, tg } = useTelegram();
 
   useEffect(() => {
@@ -14,22 +29,17 @@ function App() {
 		console.log(tg)
   }, []);
 
-  const ListId = [1, 2, 3, 4, 5]
 
   return (
-    <div className="App">
-      <Header/>
-      <BrowserRouter>
-
-        <Routes>
-         
-          {ListId.map((id, index)=>
-              <Route key={index} path={`/${id}`} element={<MyDB id={id}/>}/>
-          )}
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <Router>
+      <div className='flex-grow-1'>
+        <div className="app-wrapper ">
+            <Header/>
+          <App />
+        </div>
+      </div>
+    </Router>
   );
 }
 
-export default App;
+export default AppWrapper;

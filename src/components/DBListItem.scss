@@ -1,0 +1,14 @@
+.db-item {
+  background-color: #ececec;
+  height: 100px;
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  padding: 16px;
+
+  &--name {
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+  }
+}
