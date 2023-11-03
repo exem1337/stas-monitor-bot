@@ -1,6 +1,6 @@
 import { EDBStatuses } from "../enums/dbStatuses.enum";
 
-export interface IDbHost {
+export interface IDatabaseHost {
   host: string;
   databases: Array<IDatabase>;
 }

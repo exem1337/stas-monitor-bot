@@ -5,7 +5,7 @@ import { DB_STATUS_COLOR_MAP } from "../constants/dbStatusColorMap.const";
 import "./DBListItem.scss"
 
 interface IDbListItemProps {
-  id: string;
+  id: number;
   name: string;
   status: EDBStatuses;
 }
