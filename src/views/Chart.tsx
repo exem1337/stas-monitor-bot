@@ -9,6 +9,7 @@ import {
   YAxis,
 } from "recharts";
 import { useTelegram } from "../hooks/useTelegram";
+
 const Chart = (props) => {
   const { onToggleButton, tg } = useTelegram();
   useEffect(() => {
@@ -24,7 +25,7 @@ const Chart = (props) => {
     });
   return (
     <div className={styles.container__bloc}>
-      { JSON.stringify(tg) + 'sas'}
+      { JSON.stringify(tg.MainButton?.color) + 'sas'}
       <ResponsiveContainer
         width="100%"
         height={200}
@@ -40,24 +41,24 @@ const Chart = (props) => {
             <linearGradient id="colorUv" x1="1" y1="1" x2="1" y2="1">
               <stop
                 offset="5%"
-                stopColor={tg?.ThemeParams?.button_color}
+                stopColor={tg.MainButton?.color}
                 stopOpacity={0.5}
               />
               <stop
                 offset="95%"
-                stopColor={tg?.ThemeParams?.button_color}
+                stopColor={tg.MainButton?.color}
                 stopOpacity={0.5}
               />
             </linearGradient>
             <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
               <stop
                 offset="5%"
-                stopColor={tg?.ThemeParams?.button_color}
+                stopColor={tg.MainButton?.color}
                 stopOpacity={0.5}
               />
               <stop
                 offset="95%"
-                stopColor={tg?.ThemeParams?.button_color}
+                stopColor={tg.MainButton?.color}
                 stopOpacity={0.5}
               />
             </linearGradient>
