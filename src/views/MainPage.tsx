@@ -13,7 +13,7 @@ const MainPage = () => {
   const [dbs, setDbs] = useState<Array<IDbHost>>([]);
   const { onToggleButton, tg } = useTelegram();
   const [isLoading, setIsLoading] = useState(true);
-  const [isShowError, setIsShowError] = useState(false);
+  const [isShowError, setIsShowError] = useState('');
   const navigate = useNavigate();
   
   const getDb = async () => {
@@ -24,7 +24,7 @@ const MainPage = () => {
       });
     }
     catch (error) {
-      setIsShowError(true);
+      setIsShowError(error);
     }
     finally {
       setIsLoading(false);
@@ -47,7 +47,7 @@ const MainPage = () => {
   if (isShowError) {
     return (
       <BaseAlert 
-        text={`Произошла ошибка при загрузке данных ${tg.initDataUnsafe?.user?.id}`} 
+        text={isShowError}
       /> 
     )
   }
