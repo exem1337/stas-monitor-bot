@@ -1,3 +1,6 @@
+@import url(./styles/main-page.scss);
+@import url(./styles/add-db.scss);
+@import url(./styles/my-db.scss);
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +13,21 @@ body {
 }
 
 .app-wrapper {
-  padding: 32px;
+  padding: 16px;
+}
+
+.app-loader {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.app-loader .spinner-border {
+  --bs-spinner-width: 4rem;
+  --bs-spinner-height: 4rem;
 }
 
 /*# sourceMappingURL=App.css.map */
