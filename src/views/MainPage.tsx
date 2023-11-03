@@ -55,7 +55,8 @@ const MainPage = () => {
         </BaseActionButtonSlot>
       </BaseActionButton>
 
-      { dbs?.length && dbs?.map((db, key) => 
+      { JSON.stringify(dbs) }
+      {/* { dbs?.length && dbs?.map((db, key) => 
         <div className="main-page--db" key={key}>
           <p className="main-page--db__host">{ db.host }</p>
           { db.databases && db.databases?.map((database, index) => 
@@ -68,7 +69,7 @@ const MainPage = () => {
           ) }
         </div>
         )
-      }
+      } */}
     </div>
   )
 }
