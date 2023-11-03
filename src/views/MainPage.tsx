@@ -16,7 +16,7 @@ const MainPage = () => {
 
   return (
     <div className="main-page">
-      {(JSON.parse(userData))?.first_name}
+      {userData}
       {userDataUnsafe}
       { listId.map((id) => 
           <DBListItem 
