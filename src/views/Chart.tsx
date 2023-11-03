@@ -24,7 +24,7 @@ const Chart = (props) => {
     });
   return (
     <div className={styles.container__bloc}>
-      { JSON.stringify(tg?.ThemeParams) }
+      { JSON.stringify(tg) + 'sas'}
       <ResponsiveContainer
         width="100%"
         height={200}
