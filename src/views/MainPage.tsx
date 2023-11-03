@@ -9,6 +9,7 @@ const MainPage = () => {
   
   useEffect(() => {
     tg.ready();
+    console.log(tg.initData, tg.initDataUnsafe)
   }, [])
 
   return (
