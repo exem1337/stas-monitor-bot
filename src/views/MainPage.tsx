@@ -17,13 +17,11 @@ const MainPage = () => {
   const navigate = useNavigate();
   
   const getDb = async () => {
-    // setIsLoading(true);
-      const res = await DBApi.getAllDbs(tg.initDataUnsafe?.user?.id)
-      const parsed = await res.data;
-      setDbs(parsed);
-      
-      // setIsLoading(false);
-    
+    setIsLoading(true);
+    const res = await DBApi.getAllDbs(tg.initDataUnsafe?.user?.id)
+    const parsed = await res.data;
+    setDbs(parsed);
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -31,13 +29,13 @@ const MainPage = () => {
     getDb();
   }, [])
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="app-loader">
-  //       <Spinner />
-  //     </div>
-  //   )
-  // }
+  if (isLoading) {
+    return (
+      <div className="app-loader">
+        <Spinner />
+      </div>
+    )
+  }
 
   return (
     <div className="main-page">
@@ -53,9 +51,8 @@ const MainPage = () => {
           <AiOutlinePlus />
         </BaseActionButtonSlot>
       </BaseActionButton>
-
-      { JSON.stringify(dbs) }
-      {/* { dbs?.length && dbs?.map((db, key) => 
+      
+      { dbs?.length && dbs?.map((db, key) => 
         <div className="main-page--db" key={key}>
           <p className="main-page--db__host">{ db.host }</p>
           { db.databases && db.databases?.map((database, index) => 
@@ -68,7 +65,7 @@ const MainPage = () => {
           ) }
         </div>
         )
-      } */}
+      }
     </div>
   )
 }
