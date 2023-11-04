@@ -122,6 +122,7 @@ const MyDB = () => {
 
       <BaseButton
         text="Перезагрузить бд"
+        className="reload-db-button"
         onClick={onDbReload}
         loading={isReloading}
       />
