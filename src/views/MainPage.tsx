@@ -12,6 +12,8 @@ import TypeMarker from "../components/ui/TypeMarker/TypeMarker";
 import { MdMoreVert } from 'react-icons/md'
 import { EnTypeLogEnum } from "../components/ui/enums/enTypeLog.enum";
 import HostActionSelect from "../components/HostActionSelect/HostActionSelect";
+import Drawer from 'react-modern-drawer'
+import 'react-modern-drawer/dist/index.css'
 
 const MainPage = () => {
   const [dbs, setDbs] = useState<Array<IDatabaseHost>>([]);
@@ -119,16 +121,16 @@ const MainPage = () => {
         )
       }
       
-      {/* { selectedHost?.name ? <Drawer
+      { selectedHost?.name ? <Drawer
+        open={isVisible}
+        direction="bottom"
         duration={250}
-        hideScrollbars={true}
         onClose={closeDrawer}
-        isVisible={isVisible}
         className="host-actions"
       >
         <HostActionSelect name={selectedHost.name} status={selectedHost.status} />
       </Drawer> : <></>
-      } */}
+      }
     </div>
   )
 }
