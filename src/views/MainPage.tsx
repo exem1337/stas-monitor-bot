@@ -12,7 +12,6 @@ import TypeMarker from "../components/ui/TypeMarker/TypeMarker";
 import { MdMoreVert } from 'react-icons/md'
 import { EnTypeLogEnum } from "../components/ui/enums/enTypeLog.enum";
 import HostActionSelect from "../components/HostActionSelect/HostActionSelect";
-import Drawer from 'rc-drawer';
 import motionProps from '../constants/motion';
 
 const MainPage = () => {
