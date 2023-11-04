@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { EDBStatuses } from "../enums/dbStatuses.enum";
-import { DB_STATUS_NAME_MAP } from "../constants/dbStatusNameMap.const";
 import "./DBListItem.scss"
-import { DB_STATUS_COLOR_MAP } from "../constants/dbStatusColorMap.const";
 import StatusBadge from "./ui/StatusBadge/StatusBadge";
 import { IDatabaseClient } from "../models/db.model";
 import { Accordion } from "react-bootstrap";
@@ -29,7 +27,7 @@ const DBListItem = (props: IDbListItemProps) => {
         <span className="db-item--name">{ props.name }</span>
         <StatusBadge status={props.status} />
       </div>
-      <Accordion>
+      <Accordion className="db-item-accordion">
         <Accordion.Item eventKey="0">
             <Accordion.Header>Активные подключения</Accordion.Header>
             <Accordion.Body>

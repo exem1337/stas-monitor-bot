@@ -1,13 +1,31 @@
 .accordion {
   .accordion-header {
     .accordion-button {
-      background-color: var(--tg-theme-button-color) !important;
+      // background-color: var(--tg-theme-button-color) !important;
       font-weight: 500;
       color: white !important;
     
       &:focus {
         box-shadow: unset !important;
       }
+    }
+  }
+}
+
+.db-item-accordion {
+  margin-bottom: 16px;
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+
+  .accordion-header {
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+  
+    .accordion-button {
+      border-top-right-radius: 0 !important;
+      border-top-left-radius: 0 !important;
+      background-color: white !important;
+      color: var(--tg-theme-button-color) !important;
     }
   }
 }
