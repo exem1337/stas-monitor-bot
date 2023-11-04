@@ -6,6 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { IDatabaseHost } from "../models/db.model";
 import { Spinner } from "react-bootstrap";
 import BaseAlert from "../components/ui/BaseAlert/BaseAlert";
+import BaseSelect from "../components/ui/BaseSelect/BaseSelect";
+import { DB_ACTION_SELECT_OPTION } from "../constants/dbActionSelect.const";
+import { IBaseInputValue } from "../components/ui/models/uiKit.model";
+import { EFixProblemHandlers } from "../components/ui/enums/fixProblemHandlers.enum";
+import { DB_ACTIONS_MAP } from "../constants/dbActionMap.const";
 
 const MainPage = () => {
   const [dbs, setDbs] = useState<Array<IDatabaseHost>>([]);
@@ -27,6 +32,10 @@ const MainPage = () => {
 
   const onGoToAdd = () => {
     navigate('/add');
+  }
+
+  const onSelectDbAction = async (event: EFixProblemHandlers, host: string) => {
+    await DB_ACTIONS_MAP.get(event)?.(host);
   }
 
   useEffect(() => {
@@ -79,7 +88,10 @@ const MainPage = () => {
 
       { dbs?.length && dbs?.map((db, key) => 
         <div className="main-page--db" key={key}>
-          <p className="main-page--db__host">{ db.host }</p>
+          <div>
+            <p className="main-page--db__host">{ db.host }</p>
+            <BaseSelect options={DB_ACTION_SELECT_OPTION} onChange={(event) => onSelectDbAction(event.value as EFixProblemHandlers, db.host)} />
+          </div>
           { db.databases && db.databases?.map((database, index) => 
             <DBListItem 
               id={database.oid} 

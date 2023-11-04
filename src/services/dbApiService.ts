@@ -17,8 +17,13 @@ export class DBApi {
   }
 
   public static async reloadDb(telegramId: string, name: string) {
-    return await api.post('/monitoring/database/592957413', {
-      host: 'animefeet.servebeer.com'
-    })
+    console.log('reload')
+    // return await api.post('/monitoring/database/592957413', {
+    //   host: 'animefeet.servebeer.com'
+    // })
+  }
+
+  public static async changeCredentials() {
+    console.log('change')
   }
 }
