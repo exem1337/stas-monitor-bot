@@ -21,6 +21,19 @@
       padding-bottom: 16px;
       margin-bottom: 16px;
       border-bottom: 1px solid #ececec;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      p {
+        margin-bottom: 0;
+      }
+
+      svg {
+        margin-left: auto;
+        width: 1.5em;
+        height: 1.5em;
+      }
     }
   }
 
