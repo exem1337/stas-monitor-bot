@@ -17,7 +17,6 @@ const DBListItem = (props: IDbListItemProps) => {
   const onGoToDb = () => {
     navigate(`/${props.id}`);  
   }
-  
   return(
     <div 
       className="db-item"

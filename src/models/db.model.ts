@@ -5,6 +5,12 @@ export interface IDatabaseHost {
   host: string;
   databases: Array<IDatabase>;
   status: EnTypeLogEnum;
+  connection: IConnection;
+}
+
+interface IConnection{
+  id: number;
+  name: string
 }
 
 export interface ISelectedHost {

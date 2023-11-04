@@ -35,6 +35,16 @@
         height: 1.5em;
       }
     }
+
+    &__host-bottom{
+      p {
+        line-height: 18px;
+        span{
+          font-size: 14px !important;
+          color: gray;
+        }
+      }
+    }
   }
 
   .add-connection {
