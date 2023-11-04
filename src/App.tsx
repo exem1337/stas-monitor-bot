@@ -16,7 +16,6 @@ const App = () => {
     { path: '/:id', element: <MyDB/> },
     { path: '/add', element: <AddDBPage /> }
   ])
-
   return routes;
 }
 
