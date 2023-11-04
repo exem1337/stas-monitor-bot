@@ -1,15 +1,21 @@
 .db-item {
-  background-color: #ececec;
+  background-color: var(--tg-theme-button-color);
   height: 100px;
   width: 100%;
   border-radius: 8px;
   margin-bottom: 16px;
   padding: 16px;
+  position: relative;
 }
 .db-item--name {
   color: white;
   font-weight: 500;
   font-size: 18px;
+}
+.db-item .status-badge {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
 }
 
 /*# sourceMappingURL=DBListItem.css.map */
