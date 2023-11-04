@@ -1,5 +1,5 @@
 import { EDBStatuses } from "../enums/dbStatuses.enum";
-import {EnTypeLogEnum} from "../components/ui/enums/enTypeLog.enum";
+import { EnTypeLogEnum } from "../components/ui/enums/enTypeLog.enum";
 
 export interface IDatabaseHost {
   host: string;
@@ -21,7 +21,26 @@ export interface IDatabaseConnection {
   name: string;
 }
 
+export interface IDatabaseClient {
+  application_name: string;
+  backend_start: string;
+  backend_xid: string;
+  backend_xmin: string;
+  client_addr: string;
+  db_name: string;
+  pid: number;
+  query: string;
+  query_start: number;
+  role_name: string;
+  state: number;
+  state_change: number;
+  wait_event: string
+  wait_event_type: string;
+  xact_start: number;
+}
+
 export interface IDatabase {
+  backends: Array<IDatabaseClient>;
   active_time: number;
   age_datfrozenxid: number;
   blk_read_time: number;

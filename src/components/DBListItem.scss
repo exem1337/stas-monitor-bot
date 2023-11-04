@@ -18,4 +18,18 @@
     bottom: 16px;
     right: 16px;
   }
+
+  &--client {
+    width: 100%;
+    display: flex;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #ececec;
+    justify-content: space-between;
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+  }
 }
