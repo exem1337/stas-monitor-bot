@@ -16,6 +16,7 @@ const MyDB = () => {
   const [database, setDatabase] = useState<IDatabase>({} as IDatabase);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isReloading, setIsReloading] = useState<boolean>(true);
+  const { tg } = useTelegram();
   const [charts, setCharts] = useState<Array<Array<unknown>>>([]);
   const abortController = new AbortController();
   const signal = abortController.signal;
@@ -26,7 +27,7 @@ const MyDB = () => {
     try {
       setIsReloading(true);
       needLoader && setIsLoading(true);
-      setDatabase(await DBApi.getDb(Number(id)));
+      setDatabase(await DBApi.getDb(tg.initDataUnsafe?.user?.id?.toString(), Number(id)));
     } catch (err) {
       console.error(err);
     } finally {
@@ -49,8 +50,6 @@ const MyDB = () => {
       })),
     ]);
   }, [database]);
-
-  const { tg } = useTelegram();
 
   useEffect(() => {
     tg.ready();

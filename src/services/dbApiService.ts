@@ -3,7 +3,7 @@ import { IDatabase, IDatabaseHost } from '../models/db.model';
 
 export class DBApi {
   public static async getAllDbs(telegramId: string): Promise<Array<IDatabaseHost>> {
-    const res = await api.post('/monitoring/fullHostsDbList/592957413');
+    const res = await api.post(`/monitoring/fullHostsDbList/${telegramId}`);
     return res.data;
   }
 
@@ -11,14 +11,14 @@ export class DBApi {
     return await api.post('/connections', connection);
   }
 
-  public static async getDb(id: number): Promise<IDatabase> {
-    const res = await api.post(`/monitoring/databaseReport/592957413?oid=${id}`);
+  public static async getDb(telegramId: string, id: number): Promise<IDatabase> {
+    const res = await api.post(`/monitoring/databaseReport/${telegramId}?oid=${id}`);
     return res.data;
   }
 
-  public static async reloadDb(telegramId: string, name: string) {
-    return await api.post('/monitoring/database/592957413', {
-      host: 'animefeet.servebeer.com'
+  public static async reloadDb(telegramId: string, host: string) {
+    return await api.post(`/monitoring/database/${telegramId}`, {
+      host
     })
   }
 }
