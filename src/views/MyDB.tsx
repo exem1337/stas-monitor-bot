@@ -38,12 +38,12 @@ const MyDB = () => {
   useEffect(() => {
     setCharts([
       database.charts?.sessions?.map((session) => ({
-        name: new Date(session.date),
+        name: new Date(session.date).toLocaleString(),
         time: session.date,
         Значение: session.value,
       })),
       database.charts?.trans_idle?.map((transaction) => ({
-        name: new Date(transaction.date),
+        name: new Date(transaction.date).toLocaleString(),
         time: transaction.date,
         Значение: transaction.value,
       })),
