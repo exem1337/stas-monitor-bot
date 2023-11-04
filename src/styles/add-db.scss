@@ -20,11 +20,12 @@
     margin-bottom: 16px;
   }
 
-  &--warning{
+  &--warning {
     opacity: 0;
     transition: .2s;
   }
-  &--warning__show{
+
+  &--warning__show {
     opacity: 1;
   }
 }
