@@ -35,7 +35,7 @@ const BaseInput = (props: IBaseTextInputProps) => {
     if (!props.onChange) {
       return;
     }
-
+    
     props.onChange({ value: text, valid: !validationError });
   }
 
@@ -87,4 +87,4 @@ const BaseInput = (props: IBaseTextInputProps) => {
   )
 } 
 
-export default BaseInput;
+export default React.memo(BaseInput);

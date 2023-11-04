@@ -8,7 +8,7 @@ export function useValidationForm<T>(inputForm: T): TValidationForm<T> {
   const [internalForm, setInternalForm] = useState(inputForm)
 
   function setValue(key: string, value: IBaseInputValue): void {
-    setInternalForm(FormUtils.setFormValueByKey(internalForm, key, value) as T);
+    internalForm[key] = value;
     setForm(FormUtils.setFormValueByKey(form, key, value.value) as T);
     setIsValid(FormUtils.isFormValid(internalForm));
   }

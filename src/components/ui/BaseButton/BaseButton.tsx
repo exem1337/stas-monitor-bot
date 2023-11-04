@@ -6,6 +6,14 @@ import { IBaseButtonProps } from '../models/uiKit.model';
 const BaseButton = (props: IBaseButtonProps) => {
   const [isLoading, setIsLoading] = useState(false)
   
+  const onClickHandle = () => {
+    if (props.disabled || !props.onClick) {
+      return;
+    }
+
+    props.onClick();
+  }
+
   useEffect(() => {
     setIsLoading(props.loading);
   }, [props.loading])
@@ -14,7 +22,7 @@ const BaseButton = (props: IBaseButtonProps) => {
     <Button
       className={`base-button ${isLoading && 'loading'} ${props.className && props.className}`}
       disabled={props.disabled}
-      onClick={props.onClick}
+      onClick={() => onClickHandle()}
     >
       <div className={`base-button--loader ${isLoading && 'show'}`}>
         <Spinner size="sm" animation="border" role="status" />

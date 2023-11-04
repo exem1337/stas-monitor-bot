@@ -21,20 +21,18 @@ class HostActions {
     closeDrawerFn: () => void,
     connectionId: number,
     name: string,
-    host: string
+    host: string,
+    connectionInfo: ICreateConnection
   ) {
     this.closeDrawer = closeDrawerFn;
     this.name = name;
     this.connectionId = connectionId;
     this.host = host;
+    this.connectionInfo = connectionInfo;
   }
 
   set setDefaultViewFn(fn: () => void) {
     this.setDefaultView = fn;
-  }
-
-  async getConnectionInfo() {
-    this.connectionInfo = (await DBApi.getConnection(this.connectionId))?.data as ICreateConnection
   }
 
   close() {
@@ -197,10 +195,14 @@ export const ChangeCredentials = ({
       <BaseButton
         text="Сохранить"
         disabled={!isValid}
-        onClick={onEditConnection}
+        onClick={() => onEditConnection()}
         loading={isLoading}
       />
-      <BaseButton text="Назад" onClick={() => hostActions.setDefaultView()} />
+      <BaseButton 
+        className="add-db--back"
+        text="Назад" 
+        onClick={() => hostActions.setDefaultView()} 
+      />
     </div>
   );
 };
@@ -325,18 +327,14 @@ const HostActionsButtons = ({
 };
 
 const HostActionSelect = (props: ISelectedHost) => {
-  const hostActions = new HostActions(
-    props.closeDrawerFn,
-    props.connectionId,
-    props.name,
-    props.host
-  );
+
   const [isDataLoading, setIsDataLoading] = useState(true);
+  const [connectionInfo, setConnectionInfo] = useState<ICreateConnection>({} as ICreateConnection);
 
   const getConnection = async () => {
     try {
       setIsDataLoading(true);
-      await hostActions.getConnectionInfo();
+      setConnectionInfo((await DBApi.getConnection(props.connectionId))?.data as ICreateConnection);
     }
     catch (error) {
       console.error(error)
@@ -345,15 +343,27 @@ const HostActionSelect = (props: ISelectedHost) => {
     finally {
       setIsDataLoading(false);
     }
-  }
+  }  
+
+  const hostActions = new HostActions(
+    props.closeDrawerFn,
+    props.connectionId,
+    props.name,
+    props.host,
+    connectionInfo
+  );
 
   useEffect(() => {
+    if (!hostActions.connectionId) {
+      return;
+    }
+
     getConnection();
-  }, []);
+  }, [hostActions.connectionId]);
 
   if (isDataLoading) {
     return (
-      <div className="add-db">
+      <div className="actions-loader">
         <Spinner />
       </div>
     );
