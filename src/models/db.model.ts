@@ -10,6 +10,7 @@ export interface IDatabaseHost {
 export interface ISelectedHost {
   name: string;
   status: EnTypeLogEnum;
+
 }
 
 export interface IDatabase {

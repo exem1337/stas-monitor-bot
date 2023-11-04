@@ -1,9 +1,9 @@
 @keyframes open {
   from {
-    bottom: -100vh !important;
+    transform: translateY(-100vh);
   }
   to {
-    bottom: 0 !important;
+    transform: translateY(0vh);
   }
 }
 
@@ -11,6 +11,7 @@
   animation: .3s 1 alternate open;
   padding: 16px;
   border-top-right-radius: 16px;
+  transform: translateY(-100vh);
   border-top-left-radius: 16px;
 
   &--variants {
