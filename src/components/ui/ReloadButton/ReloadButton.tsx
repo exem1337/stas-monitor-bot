@@ -1,3 +1,4 @@
+import React from 'react';
 import { AiOutlineReload } from 'react-icons/ai';
 
 interface IReloadButtonProps {
@@ -22,4 +23,4 @@ const ReloadButton = (props: IReloadButtonProps) => {
   )
 }
 
-export default ReloadButton;
+export default React.memo(ReloadButton);
