@@ -7,7 +7,7 @@ interface ITypeMarkerProps{
 }
 const TypeMarker = (props: ITypeMarkerProps) => {
    return (
-      <div style={{backgroundColor: `${DB_TYPE_LOG_COLOR_MAP.get(props.type)}`}} className={'type-log-circle'}/>
+      <div style={{backgroundColor: `${DB_TYPE_LOG_COLOR_MAP.get(props.type)}`}} className={'type-log-bloc__circle'}/>
    );
 };
 
