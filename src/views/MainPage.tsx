@@ -68,7 +68,6 @@ const MainPage = () => {
       tg.MainButton.setParams({
         text: '+ Добавить подключение'
       })
-  
     }
 
     return () => {
@@ -121,15 +120,17 @@ const MainPage = () => {
         )
       }
       
-      { selectedHost?.name ? <Drawer
-        open={isVisible}
-        direction="bottom"
-        duration={250}
-        onClose={closeDrawer}
-        className="host-actions"
-      >
-        <HostActionSelect name={selectedHost.name} status={selectedHost.status} />
-      </Drawer> : <></>
+      { selectedHost?.name 
+          ? <Drawer
+              open={isVisible}
+              direction="bottom"
+              duration={250}
+              onClose={closeDrawer}
+              className="host-actions"
+            >
+              <HostActionSelect name={selectedHost.name} status={selectedHost.status} />
+            </Drawer> 
+          : <></>
       }
     </div>
   )
