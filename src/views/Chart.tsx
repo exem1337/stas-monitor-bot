@@ -6,7 +6,7 @@ import {
   ResponsiveContainer, Surface,
   Tooltip,
   XAxis,
-  YAxis, Text
+  YAxis
 } from "recharts";
 import { useTelegram } from "../hooks/useTelegram";
 

@@ -1,0 +1,29 @@
+.spinner-border {
+  color: var(--tg-theme-button-color) !important;
+}
+
+.reload-button {
+  animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 2em;
+  color: var(--tg-theme-button-color) !important;
+}
+.reload-button.false {
+  animation: none !important;
+}
+
+.base-select select:focus {
+  border: 1px solid blue !important;
+  box-shadow: 0 0 0.05rem blue !important;
+}
+.base-select .invalid-feedback {
+  display: block;
+}
+.base-select:has(.invalid-feedback) select {
+  border: 1px solid #dc3545 !important;
+  box-shadow: 0 0 0.05rem #dc3545 !important;
+}
+
+/*# sourceMappingURL=BaseSelect.css.map */
