@@ -9,7 +9,7 @@ const BaseInput = (props: IBaseTextInputProps) => {
   const uniqueId = `input${Math.random()}`;
   const uniqueHelpBlockId = `helpBlock${Math.random()}`;
 
-  const [text, setText] = useState(props.value || '');
+  const [text, setText] = useState(props.value || props.initialValue || '');
   const [errorMessage, setErrorMessage] = useState<EValidationTexts | string>('');
   const [isTouched, setIsTouched] = useState(false);
 
@@ -26,7 +26,14 @@ const BaseInput = (props: IBaseTextInputProps) => {
     updateValid(text, false)
   }, [])
 
-  const updateValid = (text: string, setTouched = true): void => {
+  useEffect(() => {
+    if (props.initialValue) {
+      setText(props.initialValue)
+      updateValid(props.initialValue, false);
+    }
+  }, [props.initialValue])
+
+  const updateValid = (text: string | number, setTouched = true): void => {
     setIsTouched(setTouched);
 
     const validationError = validate(text);
@@ -35,11 +42,11 @@ const BaseInput = (props: IBaseTextInputProps) => {
     if (!props.onChange) {
       return;
     }
-    
+
     props.onChange({ value: text, valid: !validationError });
   }
 
-  const validate = (value?: string) => {
+  const validate = (value?: string | number) => {
     if (props.validation) {
       return Validators.validateInput(props.validation, value);
     }

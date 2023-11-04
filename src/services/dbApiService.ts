@@ -1,5 +1,5 @@
 import api from '../http';
-import { IDatabase, IDatabaseHost } from '../models/db.model';
+import { ICreateConnection, IDatabase, IDatabaseHost } from '../models/db.model';
 
 export class DBApi {
   public static async getAllDbs(telegramId: string): Promise<Array<IDatabaseHost>> {
@@ -7,12 +7,20 @@ export class DBApi {
     return res.data;
   }
 
-  public static async createConnection(connection) {
+  public static async createConnection(connection: ICreateConnection) {
     return await api.post('/connections', connection);
   }
 
+  public static async editConnection(connectionId: number, connection: ICreateConnection) {
+    return await api.patch(`/connections/${connectionId}`, connection);
+  }
+
+  public static async getConnection(connectionId: number) {
+    return await api.get(`/connections/${connectionId}`);
+  }
+
   public static async getDb(telegramId: string, id: number): Promise<IDatabase> {
-    const res = await api.post(`/monitoring/databaseReport/${telegramId}?oid=${id}`);
+    const res = await api.post(`/monitoring/databaseReport/857600265?oid=${id}`);
     return res.data;
   }
 
@@ -22,13 +30,13 @@ export class DBApi {
     })
   }
 
-  public static async changeCredentials() {
-    console.log('change')
-  }
-
-  public static async renameConnection(connectionId, name) {
+  public static async renameConnection(connectionId: number, name: string) {
     return await api.patch(`/connections/${connectionId}`, {
       name
-    })
+    });
+  }
+
+  public static async deleteConnection(connectionId: number) {
+    return await api.delete(`/connections/${connectionId}`);
   }
 }

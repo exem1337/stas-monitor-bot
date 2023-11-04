@@ -13,6 +13,7 @@ export interface ISelectedHost {
   status: EnTypeLogEnum;
   connectionId: number;
   closeDrawerFn?: () => void;
+  host?: string;
 }
 
 export interface IDatabaseConnection {
@@ -83,4 +84,13 @@ export interface IDbTableSpace {
   oid: number;
   owner: string;
   size: number;
+}
+
+export interface ICreateConnection {
+  telegram_id?: number;
+  host: string;
+  name?: string;
+  port: string;
+  username: string;
+  password: string;
 }

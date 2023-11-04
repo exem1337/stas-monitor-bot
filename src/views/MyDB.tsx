@@ -69,7 +69,7 @@ const MyDB = () => {
 
    const onDbReload = async () => {
       setIsReloading(true);
-      await DBApi.reloadDb("", database.name);
+      await DBApi.reloadDb(tg.initDataUnsafe?.user?.id?.toString(), database.name);
       await getDbInfo();
       setIsReloading(false);
    };
@@ -133,9 +133,9 @@ const MyDB = () => {
 
                <h6>Логи</h6>
                <hr/>
-               {database?.hostLogs?.map((log) =>
+               { database?.hostLogs?.length ? database?.hostLogs?.filter((log) => !!log)?.map((log) =>
                   <Logs key={log.id} {...log}/>
-               )}
+               ) : <></>}
             </div>
             :
             <BaseAlert text={'Ошибка при получении :('} variant={"danger"}/>

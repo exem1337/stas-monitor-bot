@@ -1,34 +1,56 @@
 import { useEffect, useState } from "react";
-import { ISelectedHost } from "../../models/db.model";
+import { ICreateConnection, ISelectedHost } from "../../models/db.model";
 import BaseButton from "../ui/BaseButton/BaseButton";
 import { EnTypeLogEnum } from "../ui/enums/enTypeLog.enum";
 import { useValidationForm } from "../ui/utils/useValidationForm";
 import BaseInput from "../ui/BaseInput/BaseInput";
 import { Validators } from "../ui/validators/validators.util";
 import { DBApi } from "../../services/dbApiService";
+import { Spinner } from "react-bootstrap";
+import { useTelegram } from '../../hooks/useTelegram';
 
 class HostActions {
   closeDrawer = null;
   connectionId = null;
   setDefaultView = null;
   name = null;
-  
-  constructor(closeDrawerFn: () => void, connectionId: number, name: string) {
+  host = null;
+
+  constructor(closeDrawerFn: () => void, connectionId: number, name: string, host: string) {
     this.closeDrawer = closeDrawerFn;
+    this.name = name;
     this.connectionId = connectionId;
+    this.host = host;
   }
 
   set setDefaultViewFn(fn: () => void) {
     this.setDefaultView = fn;
   }
+
+  close() {
+    this.connectionId = null;
+    this.name = null;
+    this.host = null;
+    this.closeDrawer?.();
+  }
 }
 
 const DeleteView = ({ hostActions }: { hostActions: HostActions }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onDelete = async () => {
+    setIsLoading(true);
+    await DBApi.deleteConnection(hostActions.connectionId);
+    setIsLoading(false);
+    await hostActions.closeDrawer();
+  }
+
   return (
     <div className="host-actions--variants">
       <p>Вы точно хотите удалить подключение?</p>
       <BaseButton 
-        
+        loading={isLoading}
+        onClick={onDelete}
         text="Удалить" 
       />
       <BaseButton 
@@ -41,7 +63,7 @@ const DeleteView = ({ hostActions }: { hostActions: HostActions }) => {
 
 const RenameView = ({ hostActions }: { hostActions: HostActions }) => {
   const [isValid, form, setValue] = useValidationForm({
-    name: hostActions.name
+    name: hostActions.name || ''
   })
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,6 +71,7 @@ const RenameView = ({ hostActions }: { hostActions: HostActions }) => {
     setIsLoading(true);
     await DBApi.renameConnection(hostActions.connectionId, form.name);
     setIsLoading(false);
+    hostActions.closeDrawer();
   }
 
   return (
@@ -74,25 +97,37 @@ const RenameView = ({ hostActions }: { hostActions: HostActions }) => {
 }
 
 export const ChangeCredentials = ({ hostActions }: { hostActions: HostActions }) => {
-  const [isValid, form, setForm] = useValidationForm({
-    name: '',
-    host: '',
-    port: '',
-    login: '',
+  const [isValid, form, setForm] = useValidationForm<ICreateConnection>({
+    host: 'dsadasd',
+    port: 'asd',
+    username: 'asd',
     password: '',
   })
   const [isLoading, setIsLoading] = useState(false);
+  const [isDataLoading, setIsDataLoading] = useState(true);
+  const [connection, setConnection] = useState<ICreateConnection>();
 
-  const onCreateConnection = async () => {
+  const getConnectionInfo = async () => {
+    setIsDataLoading(true);
+    setConnection((await DBApi.getConnection(hostActions.connectionId))?.data as ICreateConnection);
+    setIsDataLoading(false);
+  }
+
+  useEffect(() => {
+    getConnectionInfo();
+  },[])
+
+  const onEditConnection = async () => {
     try {
       setIsLoading(true);
-      await DBApi.createConnection({
+      await DBApi.editConnection(hostActions.connectionId, {
         host: form.host,
         port: form.port,
-        username: form.login,
-        name: form.name,
+        username: form.username,
         password: form.password
       })
+      setIsLoading(false);
+      hostActions.closeDrawer();
     }
     catch (error) {
       
@@ -101,6 +136,18 @@ export const ChangeCredentials = ({ hostActions }: { hostActions: HostActions })
       setIsLoading(false);
     }
   }
+
+  if (isDataLoading) {
+    return (
+      <div className="add-db">
+        <Spinner />
+        <BaseButton 
+          text="Назад" 
+          onClick={() => hostActions.setDefaultView()}
+        />
+      </div>
+    )
+  }
   
   return (
     <div className="add-db">
@@ -108,27 +155,24 @@ export const ChangeCredentials = ({ hostActions }: { hostActions: HostActions })
       
       <BaseInput 
         validation={Validators.required()}
-        label="Название подключения"
-        value={form.name}
-        onChange={(event) => setForm('name', event)}
-      />
-      <BaseInput 
-        validation={Validators.required()}
         label="Хост"
         value={form.host}
+        initialValue={connection.host}
         onChange={(event) => setForm('host', event)}
       />
       <BaseInput 
         validation={[Validators.required(), Validators.onlyNumbers()]}
         label="Порт"
         value={form.port}
+        initialValue={connection.port?.toString()}
         onChange={(event) => setForm('port', event)}
       />
       <BaseInput 
         validation={Validators.required()}
         label="Имя пользователя"
-        value={form.login}
-        onChange={(event) => setForm('login', event)}
+        value={form?.username}
+        initialValue={connection.username}
+        onChange={(event) => setForm('username', event)}
       />
       <BaseInput 
         validation={Validators.required()}
@@ -137,10 +181,11 @@ export const ChangeCredentials = ({ hostActions }: { hostActions: HostActions })
         type="password"
         onChange={(event) => setForm('password', event)}
       />
+ 
       <BaseButton 
-        text="Создать" 
+        text="Сохранить" 
         disabled={!isValid}
-        onClick={onCreateConnection}
+        onClick={onEditConnection}
         loading={isLoading}
       />
       <BaseButton 
@@ -156,6 +201,8 @@ const HostActionsButtons = ({ hostActions, name, status }: { hostActions: HostAc
   const [isMainView, setIsMainView] = useState(true);
   const [isDelete, setIsDelete] = useState(false);
   const [isChangeCredentials, setIsChangeCredentials] = useState(false);
+  const [isReloading, setIsReloading] = useState(false);
+  const {user, tg} = useTelegram();
 
   const goBack = () => {
     clearAllViews();
@@ -165,12 +212,20 @@ const HostActionsButtons = ({ hostActions, name, status }: { hostActions: HostAc
   hostActions.setDefaultViewFn = goBack;
 
   useEffect(() => {
+    tg.ready();
     return () => {
       clearAllViews();
       setIsMainView(true);
     }
   },[])
   
+  const onReload = async () => {
+    setIsReloading(true);
+    await DBApi.reloadDb(user?.id, hostActions.host);
+    setIsReloading(false);
+    hostActions.closeDrawer();
+  }
+
   const clearAllViews = () => {
     setIsRename(false);
     setIsChangeCredentials(false)
@@ -185,6 +240,11 @@ const HostActionsButtons = ({ hostActions, name, status }: { hostActions: HostAc
   const onDelete = () => {
     clearAllViews();
     setIsDelete(true);
+  }
+
+  const onChangeCredentials = () => {
+    clearAllViews();
+    setIsChangeCredentials(true);
   }
 
   if (isDelete) {
@@ -209,8 +269,8 @@ const HostActionsButtons = ({ hostActions, name, status }: { hostActions: HostAc
     return (
       <div className="host-actions--variants">
         <BaseButton text="Переименовать подключение" onClick={onRename} />
-        <BaseButton text="Перезагрузить хост" />
-        <BaseButton text="Изменить данные подключения" />
+        <BaseButton text="Перезагрузить хост" loading={isReloading} onClick={onReload} />
+        <BaseButton text="Изменить данные подключения" onClick={onChangeCredentials} />
         <BaseButton text="Удалить подключение" onClick={onDelete} />
       </div>
     )
@@ -220,8 +280,8 @@ const HostActionsButtons = ({ hostActions, name, status }: { hostActions: HostAc
     return (
       <div className="host-actions--variants">
         <BaseButton text="Переименовать подключение" onClick={onRename} />
-        <BaseButton text="Перезагрузить хост" />
-        <BaseButton text="Изменить данные подключения" />
+        <BaseButton text="Перезагрузить хост" loading={isReloading} onClick={onReload} />
+        <BaseButton text="Изменить данные подключения" onClick={onChangeCredentials} />
         <BaseButton text="Удалить подключение" onClick={onDelete} />
       </div>
     )
@@ -229,11 +289,9 @@ const HostActionsButtons = ({ hostActions, name, status }: { hostActions: HostAc
 }
 
 const HostActionSelect = (props: ISelectedHost) => {
-  const hostActions = new HostActions(props.closeDrawerFn, props.connectionId, props.name);
-
+  const hostActions = new HostActions(props.closeDrawerFn, props.connectionId, props.name, props.host);
   return (
     <>
-      { hostActions.name }
       <h4>Выберите действие для { props.name }</h4>
       <HostActionsButtons hostActions={hostActions} status={props.status} name={props.name} />
     </>

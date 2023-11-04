@@ -23,12 +23,13 @@ const MainPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedHost, setSelectedHost] = useState<ISelectedHost>();
 
-  const openDrawer = useCallback((name: string, status: EnTypeLogEnum, connectionId: number) => {
+  const openDrawer = useCallback((name: string, status: EnTypeLogEnum, connectionId: number, host: string) => {
     document.body.style.overflowY = "hidden";
     setSelectedHost({
       name,
       status,
-      connectionId
+      connectionId,
+      host
     });
     setIsVisible(true);
   }, []);
@@ -53,13 +54,18 @@ const MainPage = () => {
     navigate("/add");
   };
 
+  const onCloseAndRefreshDrawer = async () => {
+    closeDrawer();
+    await getDb();
+  }
+
   useEffect(() => {
     tg.ready();
     getDb();
   }, []);
 
   useEffect(() => {
-    if (isLoading || error) {
+    if (isLoading || error || isVisible) {
       tg.MainButton.hide();
     } else {
       tg.MainButton.show();
@@ -71,7 +77,7 @@ const MainPage = () => {
     return () => {
       tg.MainButton.hide();
     };
-  }, [isLoading]);
+  }, [isLoading, isVisible]);
 
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onGoToAdd);
@@ -105,7 +111,7 @@ const MainPage = () => {
             <div className="main-page--db__host">
               <TypeMarker type={db.status} />
               <p>{db.host}</p>
-              <MdMoreVert onClick={() => openDrawer(db.connection.name, db.status, db.connection.id)} />
+              <MdMoreVert onClick={() => openDrawer(db.connection.name, db.status, db.connection.id, db.host)} />
             </div>
             {db.databases?.length ? (
               db.databases?.map((database, index) => (
@@ -140,6 +146,8 @@ const MainPage = () => {
             connectionId={selectedHost.connectionId}
             name={selectedHost?.name}
             status={selectedHost?.status}
+            closeDrawerFn={onCloseAndRefreshDrawer}
+            host={selectedHost?.host}
           />
         }
       </Drawer>

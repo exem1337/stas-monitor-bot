@@ -4,14 +4,14 @@ export type TValidationType = Array<VALIDATION_OUTPUT> | VALIDATION_OUTPUT;
 export type TValidationForm<T> = [boolean, T, (key: string, value: unknown) => void];
 
 export interface IBaseInputValue {
-  value: string;
+  value: string | number;
   valid?: boolean;
 }
 
 export interface IBaseInputProps {
   onChange?: (value: IBaseInputValue) => void | Promise<void>;
   disabled?: boolean;
-  value?: string;
+  value?: string | number;
   description?: string;
   placeholder?: string;
   validation?: TValidationType;
@@ -20,6 +20,7 @@ export interface IBaseInputProps {
 export interface IBaseTextInputProps extends IBaseInputProps {
   type?: 'text' | 'password' | 'email';
   label?: string;
+  initialValue?: string;
 }
 
 export interface IBaseActionButtonProps {

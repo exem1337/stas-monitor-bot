@@ -24,7 +24,7 @@ const BaseSelect = <T extends string>(props: IBaseSelectProps<T>) => {
     props.onChange({ value: eventValue, valid: !errorMessage })
   }
 
-  const validate = (value?: string) => {
+  const validate = (value?: string | number) => {
     setIsTouched(true);
 
     if (props.validation) {

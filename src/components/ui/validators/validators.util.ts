@@ -3,7 +3,7 @@ import { TValidationType } from "../models/uiKit.model";
 import { VALIDATION_OUTPUT } from "./constants/validatorFnType.const";
 
 export class Validators {
-  public static validateInput(validator: TValidationType, value?: string): string {
+  public static validateInput(validator: TValidationType, value?: string | number): string {
     return Array.isArray(validator) 
       ? validator?.find((validatorItem) => validatorItem(value))?.(value) 
       : validator(value) 
