@@ -16,7 +16,7 @@ export class DBApi {
   }
 
   public static async getConnection(connectionId: number) {
-    return await api.get(`/connections/${connectionId}`);
+    return await api.post(`/connections/${connectionId}`);
   }
 
   public static async getDb(telegramId: string, id: number): Promise<IDatabase> {
