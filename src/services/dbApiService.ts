@@ -39,4 +39,11 @@ export class DBApi {
   public static async deleteConnection(connectionId: number) {
     return await api.delete(`/connections/${connectionId}`);
   }
+
+  public static async executeSql(telegramId: number, host: string, command: string) {
+    return await api.post(`/monitoring/commands/${telegramId}`, {
+      host,
+      command
+    })
+  }
 }
