@@ -7,7 +7,7 @@ const Logs = (props: IDbHostLog ) => {
    return (
       <Accordion className={'mb-3'} alwaysOpen>
          <Accordion.Item eventKey="0">
-            <Accordion.Header className={'d-flex align-items-baseline'}>
+            <Accordion.Header className={'type-log-bloc'}>
                <TypeMarker type={props.type}/><span className={'ms-1'}> {props.host}</span>
             </Accordion.Header>
             <Accordion.Body>
