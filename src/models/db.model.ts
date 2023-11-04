@@ -5,17 +5,14 @@ export interface IDatabaseHost {
   host: string;
   databases: Array<IDatabase>;
   status: EnTypeLogEnum;
-  connection: IConnection;
-}
-
-interface IConnection{
-  id: number;
-  name: string
+  connection: IDatabaseConnection;
 }
 
 export interface ISelectedHost {
   name: string;
   status: EnTypeLogEnum;
+  connectionId: number;
+  closeDrawerFn?: () => void;
 }
 
 export interface IDatabaseConnection {
@@ -24,7 +21,6 @@ export interface IDatabaseConnection {
 }
 
 export interface IDatabase {
-  connection: IDatabaseConnection;
   active_time: number;
   age_datfrozenxid: number;
   blk_read_time: number;
