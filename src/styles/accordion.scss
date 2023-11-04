@@ -1,0 +1,15 @@
+.accordion {
+  --bs-accordion-bg: var(--tg-theme-button-color) !important;
+
+  .accordion-header {
+    .accordion-button {
+      background-color: var(--tg-theme-button-color) !important;
+      font-weight: 500;
+      color: white !important;
+    
+      &:focus {
+        box-shadow: unset !important;
+      }
+    }
+  }
+}

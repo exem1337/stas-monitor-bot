@@ -9,6 +9,7 @@
   max-height: 32px;
   position: relative;
   transition: opacity $transition-speed ease;
+  border-color: var(--tg-theme-button-color) !important;
   justify-content: center;
 
   &--content {
