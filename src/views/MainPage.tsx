@@ -104,7 +104,9 @@ const MainPage = () => {
           <div className="main-page--db" key={key}>
             <div className="main-page--db__host">
               <TypeMarker type={db.status} />
-              <p>{db.host}</p>
+               <div className={'main-page--db__host-bottom'}>
+                  <p>{db?.connection?.name}<br/><span>{db.host}</span></p>
+               </div>
               <MdMoreVert onClick={() => openDrawer(db.connection.name, db.status, db.connection.id)} />
             </div>
             {db.databases?.length ? (
