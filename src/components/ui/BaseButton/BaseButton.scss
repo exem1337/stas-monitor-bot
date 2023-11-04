@@ -4,13 +4,11 @@
   color: $button-text-color;
   background-color: var(--tg-theme-button-color) !important;
   transition: $transition-speed;
-  display: flex;
+  display: flex !important;
   align-items: center;
   max-height: 32px;
   position: relative;
   transition: opacity $transition-speed ease;
-  --l:50%;
-  display: flex;
   justify-content: center;
 
   &--content {

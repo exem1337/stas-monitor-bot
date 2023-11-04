@@ -6,6 +6,7 @@ import { Validators } from "../components/ui/validators/validators.util"
 import { useTelegram } from '../hooks/useTelegram'
 import { DBApi } from "../services/dbApiService"
 import { useNavigate } from "react-router-dom"
+import BaseAlert from "../components/ui/BaseAlert/BaseAlert"
 
 const AddDBPage = () => {
   const [isValid, form, setForm] = useValidationForm({
@@ -17,6 +18,8 @@ const AddDBPage = () => {
   })
   const { tg } = useTelegram();
   const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,16 +27,23 @@ const AddDBPage = () => {
   }, [])
 
   const onCreateConnection = async () => {
-    setIsLoading(true);
-    await DBApi.createConnection({
-      telegram_id: tg.initDataUnsafe?.user?.id?.toString(),
-      host: form.host,
-      port: form.port,
-      username: form.login,
-      name: form.name,
-      password: form.password
-    })
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      await DBApi.createConnection({
+        telegram_id: tg.initDataUnsafe?.user?.id?.toString(),
+        host: form.host,
+        port: form.port,
+        username: form.login,
+        name: form.name,
+        password: form.password
+      })
+    }
+    catch (error) {
+      
+    }
+    finally {
+      setIsLoading(false);
+    }
   }
   
   return (
@@ -45,6 +55,22 @@ const AddDBPage = () => {
         className="back-button"
         onClick={() => navigate('/')}
       />
+
+      { success &&  
+        <BaseAlert 
+          text="Подключение успешно создано" 
+          variant="success" 
+          onClose={() => setSuccess(false)} 
+        />
+      }
+
+      { error &&  
+        <BaseAlert 
+          text="Произошла ошибка при подключении" 
+          variant="danger" 
+          onClose={() => setError(false)} 
+        />
+      }
 
       <BaseInput 
         validation={Validators.required()}
