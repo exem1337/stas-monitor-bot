@@ -25,4 +25,10 @@ export class DBApi {
   public static async changeCredentials() {
     console.log('change')
   }
+
+  public static async renameConnection(connectionId, name) {
+    return await api.patch(`/connections/${connectionId}`, {
+      name
+    })
+  }
 }
