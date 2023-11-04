@@ -9,10 +9,11 @@ import BaseAlert from "../components/ui/BaseAlert/BaseAlert";
 import { EFixProblemHandlers } from "../components/ui/enums/fixProblemHandlers.enum";
 import { DB_ACTIONS_MAP } from "../constants/dbActionMap.const";
 import TypeMarker from "../components/ui/TypeMarker/TypeMarker";
-import Drawer from '../components/react-bottom-drawer'
 import { MdMoreVert } from 'react-icons/md'
 import { EnTypeLogEnum } from "../components/ui/enums/enTypeLog.enum";
 import HostActionSelect from "../components/HostActionSelect/HostActionSelect";
+import Drawer from 'rc-drawer';
+import motionProps from '../constants/motion';
 
 const MainPage = () => {
   const [dbs, setDbs] = useState<Array<IDatabaseHost>>([]);
@@ -119,8 +120,8 @@ const MainPage = () => {
         </div>
         )
       }
-
-      { selectedHost?.name ? <Drawer
+      
+      {/* { selectedHost?.name ? <Drawer
         duration={250}
         hideScrollbars={true}
         onClose={closeDrawer}
@@ -129,7 +130,7 @@ const MainPage = () => {
       >
         <HostActionSelect name={selectedHost.name} status={selectedHost.status} />
       </Drawer> : <></>
-      }
+      } */}
     </div>
   )
 }

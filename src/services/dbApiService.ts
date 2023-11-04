@@ -3,7 +3,7 @@ import { IDatabase, IDatabaseHost } from '../models/db.model';
 
 export class DBApi {
   public static async getAllDbs(telegramId: string): Promise<Array<IDatabaseHost>> {
-    const res = await api.post(`/monitoring/fullHostsDbList/${telegramId}`);
+    const res = await api.post(`/monitoring/fullHostsDbList/857600265`);
     return res.data;
   }
 
