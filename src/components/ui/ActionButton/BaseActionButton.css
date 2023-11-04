@@ -1,0 +1,38 @@
+.spinner-border {
+  color: var(--tg-theme-button-color) !important;
+}
+
+.reload-button {
+  animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 2em;
+  color: var(--tg-theme-button-color) !important;
+}
+.reload-button.false {
+  animation: none !important;
+}
+
+.base-action-button {
+  color: var(--tg-theme-button-color);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+  width: fit-content;
+}
+.base-action-button:hover {
+  color: #000099;
+}
+.base-action-button.disabled {
+  pointer-events: none;
+  color: #6666ff;
+}
+.base-action-button.reverse {
+  flex-direction: row-reverse;
+}
+
+/*# sourceMappingURL=BaseActionButton.css.map */

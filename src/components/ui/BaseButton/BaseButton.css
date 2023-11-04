@@ -1,0 +1,64 @@
+.spinner-border {
+  color: var(--tg-theme-button-color) !important;
+}
+
+.reload-button {
+  animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 2em;
+  color: var(--tg-theme-button-color) !important;
+}
+.reload-button.false {
+  animation: none !important;
+}
+
+.base-button {
+  color: white;
+  background-color: var(--tg-theme-button-color) !important;
+  transition: 0.3s;
+  display: flex !important;
+  align-items: center;
+  max-height: 32px;
+  position: relative;
+  transition: opacity 0.3s ease;
+  border-color: var(--tg-theme-button-color) !important;
+  justify-content: center;
+}
+.base-button--content {
+  opacity: 1;
+}
+.base-button.loading {
+  pointer-events: none;
+}
+.base-button.loading .base-button--content {
+  opacity: 0;
+}
+.base-button:hover {
+  background-color: hsla(var(--tg-theme-button-color), 50%);
+}
+.base-button:active {
+  background-color: #000099;
+}
+.base-button:focus {
+  background-color: #000099;
+}
+.base-button:disabled {
+  pointer-events: none;
+  background-color: #6666ff;
+}
+.base-button > svg {
+  margin-left: 4px;
+}
+.base-button--loader {
+  position: absolute;
+  width: 100%;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+.base-button--loader.show {
+  opacity: 1;
+}
+
+/*# sourceMappingURL=BaseButton.css.map */
