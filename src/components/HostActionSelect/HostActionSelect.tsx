@@ -55,6 +55,7 @@ const DeleteView = ({ hostActions }: { hostActions: HostActions }) => {
       <p>Вы точно хотите удалить подключение?</p>
       <BaseButton loading={isLoading} onClick={onDelete} text="Удалить" />
       <BaseButton text="Назад" onClick={() => hostActions.setDefaultView()} />
+      {JSON.stringify(hostActions.setDefaultView)}
     </div>
   );
 };
@@ -268,6 +269,7 @@ const HostActionsButtons = ({
   const clearAllViews = () => {
     setIsRename(false);
     setIsChangeCredentials(false);
+    setIsDelete(false);
     setIsMainView(false);
     setIsSql(false);
   };
