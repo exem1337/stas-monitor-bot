@@ -5,7 +5,7 @@ import { useValidationForm } from "../components/ui/utils/useValidationForm"
 import { Validators } from "../components/ui/validators/validators.util"
 import { useTelegram } from '../hooks/useTelegram'
 import { DBApi } from "../services/dbApiService"
-import { useNavigate } from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import BaseAlert from "../components/ui/BaseAlert/BaseAlert"
 
 const AddDBPage = () => {
@@ -21,6 +21,7 @@ const AddDBPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const [stateResponse, setStateResponse] = useState('')
 
   useEffect(() => {
     tg.ready();
@@ -37,9 +38,12 @@ const AddDBPage = () => {
         name: form.name,
         password: form.password
       })
+      setStateResponse('')
+      navigate('/');
     }
     catch (error) {
-      
+      console.log(error.response)
+      setStateResponse(error.response.data.message)
     }
     finally {
       setIsLoading(false);
@@ -109,6 +113,7 @@ const AddDBPage = () => {
         onClick={onCreateConnection}
         loading={isLoading}
       />
+       <div className={`mt-3 add-db--warning ${!!stateResponse && 'add-db--warning__show' }`}><BaseAlert text={stateResponse} variant={"danger"}/></div>
     </div>
   )
 }
