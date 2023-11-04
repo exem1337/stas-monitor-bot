@@ -15,4 +15,10 @@ export class DBApi {
     const res = await api.post(`/monitoring/databaseReport/592957413?oid=${id}`);
     return res.data;
   }
+
+  public static async reloadDb(telegramId: string, name: string) {
+    return await api.post('/monitoring/database/592957413', {
+      name: 'animefeet.servebeer.com'
+    })
+  }
 }

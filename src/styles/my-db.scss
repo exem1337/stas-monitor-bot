@@ -1,6 +1,6 @@
 .my-db {
   position: relative;
-  
+
   .progress {
     margin-bottom: 32px;
     
@@ -12,5 +12,21 @@
   .back-button {
     margin-top: 16px;
     margin-bottom: 16px;
+  }
+
+  .logs {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    > div {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ececec;
+    }
   }
 }

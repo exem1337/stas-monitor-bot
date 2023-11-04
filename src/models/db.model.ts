@@ -37,6 +37,15 @@ export interface IDatabase {
   xact_rollback: number;
   tablespace: IDbTableSpace;
   charts: IDbCharts;
+  hostLogs: Array<IDbHostLog>;
+}
+
+export interface IDbHostLog {
+  date: string;
+  host: string;
+  id: number;
+  message: string;
+  type: string;
 }
 
 export interface IDbCharts {
