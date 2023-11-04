@@ -13,10 +13,13 @@
   border-top-right-radius: 16px;
   transform: translateY(-100vh);
   border-top-left-radius: 16px;
+  height: fit-content !important;
+  transition: height   .3s ease;
 
   &--variants {
     margin-bottom: 32px;
     display: flex;
+    margin-top: 32px;
     flex-direction: column;
     gap: 8px;
 

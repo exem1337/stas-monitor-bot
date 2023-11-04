@@ -10,10 +10,15 @@ export interface IDatabaseHost {
 export interface ISelectedHost {
   name: string;
   status: EnTypeLogEnum;
+}
 
+export interface IDatabaseConnection {
+  id: number;
+  name: string;
 }
 
 export interface IDatabase {
+  connection: IDatabaseConnection;
   active_time: number;
   age_datfrozenxid: number;
   blk_read_time: number;
