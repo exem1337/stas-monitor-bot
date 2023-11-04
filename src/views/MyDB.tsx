@@ -4,7 +4,7 @@ import {Accordion, Container, ProgressBar, Spinner} from "react-bootstrap";
 import {useTelegram} from "../hooks/useTelegram";
 import Chart from "./Chart";
 import BaseButton from "../components/ui/BaseButton/BaseButton";
-import {IDatabase, IDbCharts} from "../models/db.model";
+import {IDatabase} from "../models/db.model";
 import {DBApi} from "../services/dbApiService";
 import StatusBadge from "../components/ui/StatusBadge/StatusBadge";
 import ReloadButton from "../components/ui/ReloadButton/ReloadButton";
@@ -21,7 +21,6 @@ const MyDB = () => {
    const [charts, setCharts] = useState<Array<Array<unknown>>>([]);
    const abortController = new AbortController();
    const [statusResponse, setStatusResponse] = useState(true);
-   const signal = abortController.signal;
 
    const getDbInfo = async (needLoader = true) => {
       abortController.abort();
@@ -66,13 +65,6 @@ const MyDB = () => {
          clearInterval(interval);
       };
    }, []);
-
-   const onDbReload = async () => {
-      setIsReloading(true);
-      await DBApi.reloadDb(tg.initDataUnsafe?.user?.id?.toString(), database.name);
-      await getDbInfo();
-      setIsReloading(false);
-   };
 
    if (isLoading) {
       return (
@@ -123,13 +115,6 @@ const MyDB = () => {
                      </Accordion.Body>
                   </Accordion.Item>
                </Accordion>
-
-               <BaseButton
-                  text="Перезагрузить бд"
-                  className="reload-db-button"
-                  onClick={onDbReload}
-                  loading={isReloading}
-               />
 
                <h6>Логи</h6>
                <hr/>
