@@ -3,15 +3,11 @@
 }
 
 .reload-button {
-  animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
   position: absolute;
   top: 16px;
   right: 16px;
   font-size: 2em;
   color: var(--tg-theme-button-color) !important;
-}
-.reload-button.false {
-  animation: none !important;
 }
 
 .base-input input:focus {

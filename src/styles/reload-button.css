@@ -1,0 +1,5 @@
+.active {
+  animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name) !important;
+}
+
+/*# sourceMappingURL=reload-button.css.map */

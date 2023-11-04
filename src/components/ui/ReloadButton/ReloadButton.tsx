@@ -1,5 +1,5 @@
-import React from 'react';
-import { AiOutlineReload } from 'react-icons/ai';
+import React, {useState} from 'react';
+import {AiOutlineReload} from 'react-icons/ai';
 
 interface IReloadButtonProps {
   isLoading: boolean;
@@ -11,15 +11,17 @@ const ReloadButton = (props: IReloadButtonProps) => {
     if (props.isLoading || !props.handler) {
       return;
     }
-
     props.handler();
   }
 
   return (
-    <AiOutlineReload
-      onClick={onClick} 
-      className={`reload-button ${props.isLoading && 'active'}`} 
-    />
+    <div>
+      <AiOutlineReload
+        onClick={onClick}
+        className={`reload-button ${props.isLoading && 'active'}`}
+      />
+    </div>
+
   )
 }
 
