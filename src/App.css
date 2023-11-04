@@ -1,6 +1,9 @@
 @import url(./styles/main-page.scss);
 @import url(./styles/add-db.scss);
 @import url(./styles/my-db.scss);
+@import url(./styles/status-badge.scss);
+@import url(./styles/accordion.scss);
+@import url(./styles/type-log-sircle.scss);
 * {
   margin: 0;
   padding: 0;

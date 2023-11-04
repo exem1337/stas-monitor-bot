@@ -53,3 +53,4 @@ export interface IBaseModalProps {
   children?: any;
   show?: boolean;
 }
+

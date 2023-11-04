@@ -8,6 +8,7 @@ import { IDatabase, IDbCharts } from "../models/db.model";
 import { DBApi } from "../services/dbApiService";
 import StatusBadge from "../components/ui/StatusBadge/StatusBadge";
 import ReloadButton from "../components/ui/ReloadButton/ReloadButton";
+import Logs from "../components/logs/Logs";
 
 const MyDB = () => {
   const { id } = useParams();
@@ -128,15 +129,10 @@ const MyDB = () => {
       />
 
       <h6>Логи</h6>
-      <div className="logs">
-        {database?.hostLogs?.map((log) => (
-          <div>
-            <span>{new Date(log.date).toString()}</span>
-            <span>{log.message}</span>
-            <span>{log.type}</span>
-          </div>
-        ))}
-      </div>
+      <hr/>
+      {database?.hostLogs?.map((log)=>
+         <Logs key={log.id} {...log}/>
+      )}
     </Container>
   );
 };
