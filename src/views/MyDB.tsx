@@ -7,12 +7,14 @@ import BaseButton from "../components/ui/BaseButton/BaseButton";
 import {IDatabase, IDbCharts} from "../models/db.model";
 import {DBApi} from "../services/dbApiService";
 import StatusBadge from "../components/ui/StatusBadge/StatusBadge";
+import ReloadButton from "../components/ui/ReloadButton/ReloadButton";
 
 const MyDB = () => {
   const { id } = useParams()
   const navigate = useNavigate();
   const [database, setDatabase] = useState<IDatabase>({} as IDatabase);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isReloading, setIsReloading] = useState<boolean>(true);
   const [charts, setCharts] = useState<Array<Array<unknown>>>([]);
   const abortController = new AbortController()
   const signal = abortController.signal;
@@ -21,6 +23,7 @@ const MyDB = () => {
     abortController.abort();
 
     try {
+      setIsReloading(true);
       needLoader && setIsLoading(true);
       setDatabase(await DBApi.getDb(Number(id)));
     }
@@ -29,6 +32,7 @@ const MyDB = () => {
     }
     finally {
       needLoader && setIsLoading(false);
+      setIsReloading(false);
     }
   }
 
@@ -64,6 +68,7 @@ const MyDB = () => {
 
   return (
     <Container className="my-db">
+      <ReloadButton isLoading={isReloading} handler={() => getDbInfo(false)} />
       <div className={'d-flex align-items-center'}>
         <h1 className={'mb-2'}>
           <span>{database.name}</span>
