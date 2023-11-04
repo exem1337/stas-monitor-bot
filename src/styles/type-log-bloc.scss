@@ -1,0 +1,10 @@
+.type-log-bloc{
+  button{
+    align-items: baseline;
+  }
+  &__circle{
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+  }
+}
