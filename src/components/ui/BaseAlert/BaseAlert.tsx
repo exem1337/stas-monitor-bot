@@ -3,7 +3,7 @@ import { Alert } from "react-bootstrap"
 interface IBaseAlert {
   text: string;
   onClose?: () => void;
-  variant?: 'danger' | 'success'
+  variant?: 'danger' | 'success' | 'light'
 }
 
 const BaseAlert = (props: IBaseAlert) => {
