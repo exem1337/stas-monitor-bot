@@ -67,6 +67,7 @@ const MyDB = () => {
   const onDbReload = async () => {
     setIsReloading(true);
     await DBApi.reloadDb("", database.name);
+    await getDbInfo();
     setIsReloading(false);
   };
 
