@@ -166,7 +166,7 @@ const MainPage = () => {
         <div className={"d-flex justify-content-end"}>
           <AiOutlineClose
             className={"btn-close"}
-            onClick={() => setIsVisible(false)}
+            onClick={() => closeDrawer()}
           />
         </div>
         {!!selectedHost && (
