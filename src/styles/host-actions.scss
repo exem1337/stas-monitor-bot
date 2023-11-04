@@ -1,0 +1,13 @@
+.host-actions {
+  &--variants {
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .base-button {
+      width: 100%;
+      height: 40px;
+    }
+  }
+}

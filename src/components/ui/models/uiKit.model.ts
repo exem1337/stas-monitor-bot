@@ -39,13 +39,15 @@ export interface IBaseButtonProps {
   loading?: boolean;
 }
 
-export interface IBaseSelectProps extends IBaseInputProps {
-  options?: Array<IBaseSelectOption>;
+export interface IBaseSelectProps<T> extends IBaseInputProps {
+  options?: Array<IBaseSelectOption<T>>;
 }
 
-export interface IBaseSelectOption {
+export interface IBaseSelectOption<T> {
   label: string;
-  value: string | number | readonly string[];
+  value: string | T | number | readonly string[];
+  disabled?: boolean;
+  selected?: boolean;
 }
 
 export interface IBaseModalProps {

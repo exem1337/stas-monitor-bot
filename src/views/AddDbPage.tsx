@@ -7,6 +7,9 @@ import { useTelegram } from '../hooks/useTelegram'
 import { DBApi } from "../services/dbApiService"
 import { useNavigate } from "react-router-dom"
 import BaseAlert from "../components/ui/BaseAlert/BaseAlert"
+import { IBaseInputValue, IBaseSelectOption } from "../components/ui/models/uiKit.model"
+import BaseSelect from "../components/ui/BaseSelect/BaseSelect"
+import { EFixProblemHandlers } from "../components/ui/enums/fixProblemHandlers.enum"
 
 const AddDBPage = () => {
   const [isValid, form, setForm] = useValidationForm({

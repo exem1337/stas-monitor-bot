@@ -21,4 +21,8 @@ export class DBApi {
       host
     })
   }
+
+  public static async changeCredentials() {
+    console.log('change')
+  }
 }

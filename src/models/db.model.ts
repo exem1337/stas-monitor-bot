@@ -4,6 +4,12 @@ import {EnTypeLogEnum} from "../components/ui/enums/enTypeLog.enum";
 export interface IDatabaseHost {
   host: string;
   databases: Array<IDatabase>;
+  status: EnTypeLogEnum;
+}
+
+export interface ISelectedHost {
+  name: string;
+  status: EnTypeLogEnum;
 }
 
 export interface IDatabase {
