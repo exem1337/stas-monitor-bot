@@ -1,5 +1,5 @@
 import DBListItem from "../components/DBListItem";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTelegram } from "../hooks/useTelegram";
 import { DBApi } from "../services/dbApiService";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,8 @@ import { MdMoreVert } from "react-icons/md";
 import { EnTypeLogEnum } from "../components/ui/enums/enTypeLog.enum";
 import HostActionSelect from "../components/HostActionSelect/HostActionSelect";
 import Drawer from "react-modern-drawer";
-import "react-modern-drawer/dist/index.css";
 import { AiOutlineClose } from "react-icons/ai";
+import "react-modern-drawer/dist/index.css";
 
 const MainPage = () => {
   const [dbs, setDbs] = useState<Array<IDatabaseHost>>([]);

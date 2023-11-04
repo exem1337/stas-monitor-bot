@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import api from '../http';
 import { ICreateConnection, IDatabase, IDatabaseHost } from '../models/db.model';
 
@@ -7,15 +8,15 @@ export class DBApi {
     return res.data;
   }
 
-  public static async createConnection(connection: ICreateConnection) {
+  public static async createConnection(connection: ICreateConnection): Promise<void> {
     return await api.post('/connections', connection);
   }
 
-  public static async editConnection(connectionId: number, connection: ICreateConnection) {
+  public static async editConnection(connectionId: number, connection: ICreateConnection): Promise<void> {
     return await api.patch(`/connections/${connectionId}`, connection);
   }
 
-  public static async getConnection(connectionId: number) {
+  public static async getConnection(connectionId: number): Promise<AxiosResponse<ICreateConnection>> {
     return await api.post(`/connections/${connectionId}`);
   }
 
@@ -24,23 +25,23 @@ export class DBApi {
     return res.data;
   }
 
-  public static async reloadDb(telegramId: string, host: string) {
+  public static async reloadDb(telegramId: string, host: string): Promise<void> {
     return await api.post(`/monitoring/database/${telegramId}`, {
       host
     })
   }
 
-  public static async renameConnection(connectionId: number, name: string) {
+  public static async renameConnection(connectionId: number, name: string): Promise<void> {
     return await api.patch(`/connections/${connectionId}`, {
       name
     });
   }
 
-  public static async deleteConnection(connectionId: number) {
+  public static async deleteConnection(connectionId: number): Promise<void> {
     return await api.delete(`/connections/${connectionId}`);
   }
 
-  public static async executeSql(telegramId: number, host: string, command: string) {
+  public static async executeSql(telegramId: number, host: string, command: string): Promise<void> {
     return await api.post(`/monitoring/commands/${telegramId}`, {
       host,
       command

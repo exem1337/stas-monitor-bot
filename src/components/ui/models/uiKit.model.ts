@@ -20,7 +20,6 @@ export interface IBaseInputProps {
 export interface IBaseTextInputProps extends IBaseInputProps {
   type?: 'text' | 'password' | 'email';
   label?: string;
-  initialValue?: string;
 }
 
 export interface IBaseActionButtonProps {

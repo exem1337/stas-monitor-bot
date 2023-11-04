@@ -7,11 +7,13 @@
   padding: 16px;
   position: relative;
 }
+
 .db-item--name {
   color: white;
   font-weight: 500;
   font-size: 18px;
 }
+
 .db-item .status-badge {
   position: absolute;
   bottom: 16px;

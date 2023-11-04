@@ -15,6 +15,7 @@ class HostActions {
   setDefaultView = null;
   name = null;
   host = null;
+  connectionInfo = null;
 
   constructor(
     closeDrawerFn: () => void,
@@ -30,6 +31,10 @@ class HostActions {
 
   set setDefaultViewFn(fn: () => void) {
     this.setDefaultView = fn;
+  }
+
+  async getConnectionInfo() {
+    this.connectionInfo = (await DBApi.getConnection(this.connectionId))?.data as ICreateConnection
   }
 
   close() {
@@ -135,27 +140,12 @@ export const ChangeCredentials = ({
   hostActions: HostActions;
 }) => {
   const [isValid, form, setForm] = useValidationForm<ICreateConnection>({
-    host: "dsadasd",
-    port: "asd",
-    username: "asd",
+    host: hostActions.connectionInfo?.host || '',
+    port: hostActions.connectionInfo?.port || '',
+    username: hostActions.connectionInfo?.username || '',
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [isDataLoading, setIsDataLoading] = useState(true);
-  const [connection, setConnection] = useState<ICreateConnection>();
-
-  const getConnectionInfo = async () => {
-    setIsDataLoading(true);
-    setConnection(
-      (await DBApi.getConnection(hostActions.connectionId))
-        ?.data as ICreateConnection
-    );
-    setIsDataLoading(false);
-  };
-
-  useEffect(() => {
-    getConnectionInfo();
-  }, []);
 
   const onEditConnection = async () => {
     try {
@@ -174,15 +164,6 @@ export const ChangeCredentials = ({
     }
   };
 
-  if (isDataLoading) {
-    return (
-      <div className="add-db">
-        <Spinner />
-        <BaseButton text="Назад" onClick={() => hostActions.setDefaultView()} />
-      </div>
-    );
-  }
-
   return (
     <div className="add-db">
       <h4>Редактирование подключения</h4>
@@ -191,21 +172,18 @@ export const ChangeCredentials = ({
         validation={Validators.required()}
         label="Хост"
         value={form.host}
-        initialValue={connection.host}
         onChange={(event) => setForm("host", event)}
       />
       <BaseInput
         validation={[Validators.required(), Validators.onlyNumbers()]}
         label="Порт"
         value={form.port}
-        initialValue={connection.port?.toString()}
         onChange={(event) => setForm("port", event)}
       />
       <BaseInput
         validation={Validators.required()}
         label="Имя пользователя"
         value={form?.username}
-        initialValue={connection.username}
         onChange={(event) => setForm("username", event)}
       />
       <BaseInput
@@ -229,11 +207,9 @@ export const ChangeCredentials = ({
 
 const HostActionsButtons = ({
   hostActions,
-  name,
   status,
 }: {
   hostActions: HostActions;
-  name: string;
   status: EnTypeLogEnum;
 }) => {
   const [isRename, setIsRename] = useState(false);
@@ -355,13 +331,40 @@ const HostActionSelect = (props: ISelectedHost) => {
     props.name,
     props.host
   );
+  const [isDataLoading, setIsDataLoading] = useState(true);
+
+  const getConnection = async () => {
+    try {
+      setIsDataLoading(true);
+      await hostActions.getConnectionInfo();
+    }
+    catch (error) {
+      console.error(error)
+      hostActions.closeDrawer();
+    }
+    finally {
+      setIsDataLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getConnection();
+  }, []);
+
+  if (isDataLoading) {
+    return (
+      <div className="add-db">
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <>
       <h4>Выберите действие для {props.name}</h4>
       <HostActionsButtons
         hostActions={hostActions}
         status={props.status}
-        name={props.name}
       />
     </>
   );

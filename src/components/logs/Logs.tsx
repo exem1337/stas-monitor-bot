@@ -12,9 +12,7 @@ const Logs = (props: IDbHostLog ) => {
             </Accordion.Header>
             <Accordion.Body>
                <p>Дата: {new Date(props.date).toLocaleString()}</p>
-               <p>
-                  {props.message}
-               </p>
+               <p>{props.message}</p>
             </Accordion.Body>
          </Accordion.Item>
       </Accordion>

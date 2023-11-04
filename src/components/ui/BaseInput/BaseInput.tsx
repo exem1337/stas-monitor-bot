@@ -2,14 +2,14 @@ import { FloatingLabel, Form } from "react-bootstrap";
 import React, { useEffect, useState } from 'react';
 import { IBaseTextInputProps } from "../models/uiKit.model";
 import { EValidationTexts } from "../enums/validationTexts.enum";
-import './BaseInput.scss'
 import { Validators } from "../validators/validators.util";
+import './BaseInput.scss'
 
 const BaseInput = (props: IBaseTextInputProps) => {
   const uniqueId = `input${Math.random()}`;
   const uniqueHelpBlockId = `helpBlock${Math.random()}`;
 
-  const [text, setText] = useState(props.value || props.initialValue || '');
+  const [text, setText] = useState(props.value || '');
   const [errorMessage, setErrorMessage] = useState<EValidationTexts | string>('');
   const [isTouched, setIsTouched] = useState(false);
 
@@ -25,13 +25,6 @@ const BaseInput = (props: IBaseTextInputProps) => {
   useEffect(() => {
     updateValid(text, false)
   }, [])
-
-  useEffect(() => {
-    if (props.initialValue) {
-      setText(props.initialValue)
-      updateValid(props.initialValue, false);
-    }
-  }, [props.initialValue])
 
   const updateValid = (text: string | number, setTouched = true): void => {
     setIsTouched(setTouched);
