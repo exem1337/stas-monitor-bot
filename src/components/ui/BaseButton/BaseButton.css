@@ -16,7 +16,7 @@
 
 .base-button {
   color: white;
-  background-color: var(--tg-theme-button-color) !important;
+  background-color: blue;
   transition: 0.3s;
   display: flex !important;
   align-items: center;
