@@ -1,4 +1,5 @@
 import { EDBStatuses } from "../enums/dbStatuses.enum";
+import {EnTypeLogEnum} from "../components/ui/enums/enTypeLog.enum";
 
 export interface IDatabaseHost {
   host: string;
@@ -45,7 +46,7 @@ export interface IDbHostLog {
   host: string;
   id: number;
   message: string;
-  type: string;
+  type: EnTypeLogEnum;
 }
 
 export interface IDbCharts {

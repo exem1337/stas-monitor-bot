@@ -1,11 +1,9 @@
 import React from 'react';
 import {IDbHostLog} from "../../models/db.model";
 import {Accordion} from "react-bootstrap";
-import StatusBadge from "../ui/StatusBadge/StatusBadge";
 import TypeMarker from "../ui/TypeMarker/TypeMarker";
 
 const Logs = (props: IDbHostLog ) => {
-   console.log(props)
    return (
       <Accordion className={'mb-3'} alwaysOpen>
          <Accordion.Item eventKey="0">

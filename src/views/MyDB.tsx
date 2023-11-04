@@ -131,18 +131,8 @@ const MyDB = () => {
       <h6>Логи</h6>
       <hr/>
       {database?.hostLogs?.map((log)=>
-         <Logs {...log}/>
+         <Logs key={log.id} {...log}/>
       )}
-
-      {/*<div className="logs">*/}
-      {/*  {database?.hostLogs?.map((log) => (*/}
-      {/*    <div>*/}
-      {/*      <span>{new Date(log.date).toString()}</span>*/}
-      {/*      <span>{log.message}</span>*/}
-      {/*      <span>{log.type}</span>*/}
-      {/*    </div>*/}
-      {/*  ))}*/}
-      {/*</div>*/}
     </Container>
   );
 };
