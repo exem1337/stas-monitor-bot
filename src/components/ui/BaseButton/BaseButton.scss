@@ -3,6 +3,7 @@
 .base-button {
   color: $button-text-color;
   background-color: var(--tg-theme-button-color) !important;
+  // background-color: blue !important;
   transition: $transition-speed;
   display: flex !important;
   align-items: center;
@@ -50,6 +51,7 @@
     width: 100%;
     transition: opacity $transition-speed ease;
     opacity: 0;
+    z-index: 1000;
 
     &.show {
       opacity: 1;

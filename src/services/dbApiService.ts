@@ -4,7 +4,7 @@ import { ICreateConnection, IDatabase, IDatabaseHost } from '../models/db.model'
 
 export class DBApi {
   public static async getAllDbs(telegramId: string): Promise<Array<IDatabaseHost>> {
-    const res = await api.post(`/monitoring/fullHostsDbList/857600265`);
+    const res = await api.post(`/monitoring/fullHostsDbList/${telegramId}`);
     return res.data;
   }
 
