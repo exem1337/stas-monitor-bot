@@ -9,7 +9,7 @@ export function useValidationForm<T>(inputForm: T): TValidationForm<T> {
 
   function setValue(key: string, value: IBaseInputValue): void {
     internalForm[key] = value;
-    form[key] = value.value;
+    setForm(FormUtils.setFormValueByKey(form, key, value.value) as T);
     setIsValid(FormUtils.isFormValid(internalForm));
   }
 
